@@ -7,6 +7,7 @@ import me.zeroX150.atomic.feature.module.ModuleType;
 import me.zeroX150.atomic.feature.module.config.BooleanValue;
 import me.zeroX150.atomic.feature.module.config.SliderValue;
 import me.zeroX150.atomic.helper.Renderer;
+import me.zeroX150.atomic.helper.Rotations;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -61,8 +62,10 @@ public class AutoCone extends Module {
         if (jesusFuckingChrist.isEmpty()) return;
         BlockPos nextPlacement = jesusFuckingChrist.get(0);
         if (Atomic.client.player.getInventory().getMainHandStack().isEmpty()) return;
+        Vec3d target = new Vec3d(nextPlacement.getX() + .5, nextPlacement.getY() + .5, nextPlacement.getZ() + .5);
+        Rotations.lookAtV3(target);
         Atomic.client.player.swingHand(Hand.MAIN_HAND);
-        Atomic.client.interactionManager.interactBlock(Atomic.client.player, Atomic.client.world, Hand.MAIN_HAND, new BlockHitResult(new Vec3d(nextPlacement.getX(), nextPlacement.getY(), nextPlacement.getZ()), Direction.DOWN, nextPlacement, false));
+        Atomic.client.interactionManager.interactBlock(Atomic.client.player, Atomic.client.world, Hand.MAIN_HAND, new BlockHitResult(target, Direction.DOWN, nextPlacement, false));
     }
 
     @Override
