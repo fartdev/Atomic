@@ -43,7 +43,8 @@
     "network.ClientPlayNetworkHandlerMixin",
     "network.ICustomPayloadC2SPacketAccessor",
     "network.IPlayerMoveC2SPacketAccessor",
-    "network.MultiplayerServerListPingerAccessor"
+    "network.MultiplayerServerListPingerAccessor",
+    "network.SessionMixin"
   ],
   "client": [],
   "server": [],

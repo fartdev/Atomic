@@ -1,11 +1,13 @@
 package me.zeroX150.atomic.feature.gui.screen;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.gui.clickgui.ClickGUI;
 import me.zeroX150.atomic.feature.gui.overlay.WelcomeOverlay;
 import me.zeroX150.atomic.feature.gui.particles.ParticleManager;
 import me.zeroX150.atomic.feature.module.impl.external.ClientConfig;
+import me.zeroX150.atomic.helper.Client;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
@@ -16,11 +18,14 @@ import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Util;
+import org.lwjgl.opengl.GL11;
 
 public class HomeScreen extends Screen {
     static boolean shownWelcome = false;
     boolean isMeteorLoaded = false;
     ParticleManager pm = new ParticleManager(200);
+    String t = "Atomic, made by ";
 
     public HomeScreen() {
         super(Text.of("a"));
@@ -63,16 +68,32 @@ public class HomeScreen extends Screen {
         RenderSystem.blendFunc(770, 1);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        GlStateManager._texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+        GlStateManager._texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
         drawTexture(matrices, (int) (width / 2 - (504 * logoSize / 2)), 10, 0, 0, 0, (int) (504 * logoSize), (int) (130 * logoSize), (int) (130 * logoSize), (int) (504 * logoSize));
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableBlend();
         if (isMeteorLoaded) {
             Atomic.fontRenderer.drawString(matrices, "Fuck meteor edition", 1, 1, 0xFFFFFF);
         }
+        Atomic.fontRenderer.drawString(matrices, t, 1, height - 10, 0xFFFFFF);
+        Atomic.fontRenderer.drawString(matrices, "0x150", 1 + Atomic.fontRenderer.getStringWidth(t), height - 10, Client.getCurrentRGB().getRGB());
         super.render(matrices, mouseX, mouseY, delta);
     }
 
     ButtonWidget createCentered(String t, int y, ButtonWidget.PressAction action) {
         return new ButtonWidget(width / 2 - (150 / 2), y, 150, 20, Text.of(t), action);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        float width = Atomic.fontRenderer.getStringWidth(t);
+        float mwidth = width + Atomic.fontRenderer.getStringWidth("0x150");
+        float h = height - 10;
+        float m = height - 1;
+        if (mouseX >= width && mouseX <= mwidth && mouseY >= h && mouseY <= m) {
+            Util.getOperatingSystem().open("https://0x150.cf");
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 }

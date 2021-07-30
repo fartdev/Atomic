@@ -5,6 +5,7 @@ import me.zeroX150.atomic.feature.gui.screen.AltManager;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleRegistry;
 import me.zeroX150.atomic.helper.ConfigManager;
+import me.zeroX150.atomic.helper.Rotations;
 import me.zeroX150.atomic.helper.font.FontRenderer;
 import me.zeroX150.atomic.helper.keybind.KeybindManager;
 import net.fabricmc.api.ModInitializer;
@@ -54,6 +55,7 @@ public class Atomic implements ModInitializer {
                     }
                 }
                 if (ClickGUI.INSTANCE != null) ClickGUI.INSTANCE.onFastTick();
+                Rotations.update();
             }
         }, "100_tps_ticker");
         FAST_TICKER.start();
