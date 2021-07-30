@@ -36,3 +36,7 @@ The default launcher should already choose java 16 for the runtime, so you're fr
 1. Install [fabric](https://fabricmc.net/use/) for 1.17
 2. Drag the .jar into the `~/Library/Application Support/minecraft/mods` folder
 3. Launch fabric loader for 1.17 via the minecraft launcher
+
+## Stargazers
+
+[![Stargazers over time](https://starchart.cc/cornos/Atomic.svg)](https://starchart.cc/cornos/Atomic)
