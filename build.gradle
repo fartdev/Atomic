@@ -29,7 +29,7 @@ dependencies {
 
 	modImplementation(include("net.fabricmc.fabric-api:fabric-resource-loader-v0:0.4.7+b7ab6121d5"))
 
-	if (false) {
+	if (true) {
 		//baritone for releases/builds (breaks in dev environment)
 		modImplementation name: 'baritone-api-fabric-1.7.0'
 		include name: 'baritone-api-fabric-1.7.0'
