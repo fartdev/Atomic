@@ -23,6 +23,7 @@ public class CommandRegistry {
         commands.add(new ViewNbt());
         commands.add(new ChatSequence());
         commands.add(new BaritoneOreSim());
+        commands.add(new Baritone());
     }
 
     public static List<Command> getCommands() {

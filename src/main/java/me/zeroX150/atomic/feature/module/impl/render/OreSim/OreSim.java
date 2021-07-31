@@ -34,6 +34,8 @@ import java.util.*;
 public class OreSim extends Module {
 
     private final HashMap<Long, HashMap<Ore.Type, HashSet<Vec3d>>> chunkRenderers = new HashMap<>();
+    private final HashSet<Vec3d> blackList = new HashSet<>();
+    public boolean automine = false;
     List<Ore> oreConfig;
     SliderValue chunkRange;
     DynamicValue<String> seedInput;
@@ -42,8 +44,6 @@ public class OreSim extends Module {
     String versionString;
     private Long worldSeed = null;
     private ChunkPos prevOffset = new ChunkPos(0, 0);
-    private final HashSet<Vec3d> blackList = new HashSet<>();
-    public boolean automine = false;
 
     public OreSim() {
         super("OreSim", "xray on crack", ModuleType.RENDER);

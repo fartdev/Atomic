@@ -1,5 +1,6 @@
 package me.zeroX150.atomic.helper;
 
+import baritone.api.Settings$Setting;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
@@ -38,6 +39,12 @@ public class Client {
     };
     public static ServerInfo latestServerInfo;
     private static Input INPUT_NORMAL = null;
+
+    // this is so fucking hacky but i have no other choice jesus fucking christ
+    // intellijsense just fucking breaks when i dont do it this way
+    public static <T> T getValueFromBaritoneSetting(Settings$Setting<T> v) {
+        return v.value;
+    }
 
     public static void drop(int index) {
         int translatedSlotId;
