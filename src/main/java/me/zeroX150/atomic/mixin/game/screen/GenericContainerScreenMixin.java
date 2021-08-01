@@ -37,6 +37,10 @@ public abstract class GenericContainerScreenMixin<T extends ScreenHandler> exten
     protected int y;
     boolean isSelecting = false;
     ButtonWidget bw;
+    KeyBinding arrowRight = new KeyBinding("", GLFW.GLFW_KEY_RIGHT, "");
+    KeyBinding arrowLeft = new KeyBinding("", GLFW.GLFW_KEY_LEFT, "");
+    KeyBinding arrowUp = new KeyBinding("", GLFW.GLFW_KEY_UP, "");
+    KeyBinding arrowDown = new KeyBinding("", GLFW.GLFW_KEY_DOWN, "");
 
     protected GenericContainerScreenMixin(Text title) {
         super(title);
@@ -55,11 +59,6 @@ public abstract class GenericContainerScreenMixin<T extends ScreenHandler> exten
         });
         this.addDrawableChild(bw);
     }
-
-    KeyBinding arrowRight = new KeyBinding("", GLFW.GLFW_KEY_RIGHT, "");
-    KeyBinding arrowLeft = new KeyBinding("", GLFW.GLFW_KEY_LEFT, "");
-    KeyBinding arrowUp = new KeyBinding("", GLFW.GLFW_KEY_UP, "");
-    KeyBinding arrowDown = new KeyBinding("", GLFW.GLFW_KEY_DOWN, "");
 
     boolean keyPressed(KeyBinding bind) {
         return InputUtil.isKeyPressed(Atomic.client.getWindow().getHandle(), bind.getDefaultKey().getCode());
