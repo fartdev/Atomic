@@ -25,7 +25,7 @@ public class Timer extends Module {
 
     @Override
     public void disable() {
-
+        Client.setClientTps(20f);
     }
 
     @Override
