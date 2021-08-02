@@ -26,6 +26,16 @@ public class ConfigManager {
 
     static File CONFIG_FILE;
 
+    static String TOP_NOTE = """
+            // !!! READ ME, BEFORE DOING ANYTHING IN HERE !!!
+            // UNLESS YOU 100% KNOW WHAT YOU ARE DOING, NEVER SHARE THIS FILE WITH SOMEONE ELSE.
+            // YOUR ALTS ARE SAVED IN HERE. UNLESS YOU KNOW HOW TO REMOVE THEM, DO NOT SHARE THIS FILE.
+            // IF SOMEONE TOLD YOU TO SEND THEM THIS FILE WITHOUT EXPLANATION, YOU HAVE A 12/10 CHANCE OF BEING SCAMMED.
+                        
+            // also uh, you could break stuff if you directly modify shit in here, so dont do that unless you know what you're doing.
+            // back this shit up before doing anything in case you do a major fuck
+            """;
+
     static {
         CONFIG_FILE = new File(Atomic.client.runDirectory.getAbsolutePath() + "/config.atomic");
     }
@@ -56,7 +66,7 @@ public class ConfigManager {
         base.add("enabled", enabled);
         base.add("config", config);
         try {
-            FileUtils.writeStringToFile(CONFIG_FILE, base.toString(), Charsets.UTF_8, false);
+            FileUtils.writeStringToFile(CONFIG_FILE, TOP_NOTE + base, Charsets.UTF_8, false);
         } catch (IOException e) {
             e.printStackTrace();
             Atomic.log(Level.ERROR, "Failed to save config!");
