@@ -49,8 +49,9 @@ public class Clickable {
         animProg = MathHelper.clamp(animProg, 0, 1);
         double animProg1Inter = easeOutBounce(animProg1);
         double animProgInter = easeOutBounce(animProg);
-        DrawableHelper.fill(stack, (int) (x - margin), (int) Math.floor(y - margin), (int) (x + width + margin), (int) Math.floor(y + (margin + 9) * animProgress), fillColor.getRGB());
-        DrawableHelper.fill(stack, (int) (x - margin), (int) Math.floor(y - margin), (int) (x - margin + (width + margin * 2) * animProgInter), (int) Math.floor(y + (margin + 9) * animProgress), ClickGUI.currentActiveTheme.active().getRGB());
+        double floor = Math.floor(y + (margin + 9) * animProgress);
+        DrawableHelper.fill(stack, (int) (x - margin), (int) Math.floor(y - margin), (int) (x + width + margin), (int) floor, fillColor.getRGB());
+        DrawableHelper.fill(stack, (int) (x - margin), (int) Math.floor(y - margin), (int) (x - margin + (width + margin * 2) * animProgInter), (int) floor, ClickGUI.currentActiveTheme.active().getRGB());
         //DrawableHelper.fill(stack, (int) (x - margin), (int) Math.floor(y - margin), (int) (x - margin + 1.5), (int) Math.floor(y - margin + ((margin * 2 + 9) * animProg1Inter) * animProgress), ClickGUI.currentActiveTheme.l_highlight().getRGB());
         Renderer.fill(stack, ClickGUI.currentActiveTheme.l_highlight(), x - margin, y - margin, x - margin + 1.5, y - margin + ((margin * 2 + 9) * animProg1Inter) * animProgress);
         if (ClickGUI.currentActiveTheme.centerText())

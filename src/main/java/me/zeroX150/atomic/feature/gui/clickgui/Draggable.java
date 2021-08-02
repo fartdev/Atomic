@@ -79,8 +79,6 @@ public class Draggable {
         lastRenderX -= nxDiff;
         lastRenderY -= nyDiff;
         if (trackedLastRenderX == -1) trackedLastRenderX = lastRenderX;
-        if (trackedLastRenderY == -1) {
-        }
         lrXDiff = lastRenderX - trackedLastRenderX;
         trackedLastRenderX = lastRenderX;
         trackedLastRenderY = lastRenderY;
@@ -96,6 +94,7 @@ public class Draggable {
 
     public void render(MatrixStack stack, float delta, double aProgI, double yOff) {
 
+        //float scaleInv = (float) Math.abs(1-aProgI);
         if (this.expanded) animProg += (System.currentTimeMillis() - lastRender) / 500d;
         else animProg -= (System.currentTimeMillis() - lastRender) / 500d;
         if (System.currentTimeMillis() - lastRender > 1) lastRender = System.currentTimeMillis();

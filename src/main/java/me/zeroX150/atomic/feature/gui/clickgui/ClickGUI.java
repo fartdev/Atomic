@@ -70,7 +70,7 @@ public class ClickGUI extends Screen {
     }
 
     public void onFastTick() {
-        double a = me.zeroX150.atomic.feature.module.impl.render.ClickGUI.instant.getValue() ? 1 : 0.011;
+        double a = me.zeroX150.atomic.feature.module.impl.render.ClickGUI.instant.getValue() ? 1 : 0.020;
         aProg += closed ? a : -a;
         aProg = MathHelper.clamp(aProg, 0, 1);
         for (Draggable container : containers.toArray(new Draggable[0])) {
@@ -221,15 +221,15 @@ public class ClickGUI extends Screen {
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         Matrix4f matrices4 = matrices.peek().getModel();
-        int a = (int) Math.floor(Math.abs(1 - aProgI) * 80);
+        int a = (int) Math.floor(Math.abs(1 - aProgI) * 150);
         float offset = (float) ((System.currentTimeMillis() % 3000) / 3000d);
         float hsv2p = 0.25f + offset;
         float hsv3p = 0.5f + offset;
         float hsv4p = 0.75f + offset;
-        Color hsv1 = Color.getHSBColor(offset % 1, 0.6f, 1f);
-        Color hsv2 = Color.getHSBColor(hsv2p % 1, 0.6f, 1f);
-        Color hsv3 = Color.getHSBColor(hsv3p % 1, 0.6f, 1f);
-        Color hsv4 = Color.getHSBColor(hsv4p % 1, 0.6f, 1f);
+        Color hsv1 = Color.getHSBColor(offset % 1, 0.6f, 0.6f);
+        Color hsv2 = Color.getHSBColor(hsv2p % 1, 0.6f, 0.6f);
+        Color hsv3 = Color.getHSBColor(hsv3p % 1, 0.6f, 0.6f);
+        Color hsv4 = Color.getHSBColor(hsv4p % 1, 0.6f, 0.6f);
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
         bufferBuilder.vertex(matrices4, 0, 0, 0).color(hsv1.getRed(), hsv1.getGreen(), hsv1.getBlue(), a).next();
         bufferBuilder.vertex(matrices4, 0, height, 0).color(hsv2.getRed(), hsv2.getGreen(), hsv2.getBlue(), a).next();
@@ -238,7 +238,12 @@ public class ClickGUI extends Screen {
         bufferBuilder.end();
         BufferRenderer.draw(bufferBuilder);
         RenderSystem.disableBlend();
-        matrices.translate(-aProgI * width, 0, 0);
+        float scaleInv = (float) Transitions.easeOutBack(Math.abs(1 - aProg));
+        float api = 1 - scaleInv;
+        matrices.push();
+        matrices.translate((aProgI * width) / 2f, (aProgI * height) / 2f, 0);
+        matrices.scale(scaleInv, scaleInv, 1);
+        //matrices.translate(-aProgI * width, 0, 0);
         if (System.currentTimeMillis() - lastRender > 1) lastRender = System.currentTimeMillis();
         double logoSize = me.zeroX150.atomic.feature.module.impl.render.ClickGUI.logoSize.getValue();
         if (logoSize != 0) {
@@ -252,22 +257,28 @@ public class ClickGUI extends Screen {
             RenderSystem.defaultBlendFunc();
             RenderSystem.disableBlend();
         }
-        matrices.translate(2 * aProgI * width, 0, 0);
+        //matrices.translate(2 * aProgI * width, 0, 0);
         matrices.translate(0, trackedScroll, 0);
-        if (currentConfig != null) currentConfig.render(matrices, mouseX, mouseY, delta, trackedScroll);
+        MatrixStack configStack = new MatrixStack();
+        configStack.translate((api * width), 0, 0);
+        if (currentConfig != null) currentConfig.render(configStack, mouseX, mouseY, delta, trackedScroll);
         matrices.translate(0, -trackedScroll, 0);
         for (Draggable container : containers) {
             MatrixStack ms = new MatrixStack();
-            ms.translate(aProgI * width, 0, 0);
+            //ms.translate(aProgI * width, 0, 0);
             ms.translate(0, trackedScroll, 0);
-            container.render(ms, delta, aProgI, trackedScroll);
+            ms.translate((api * width) / 2f, (api * height) / 2f, 0);
+            ms.scale(scaleInv, scaleInv, 1);
+            container.render(ms, delta, api, trackedScroll);
         }
+        matrices.pop();
+        matrices.translate((api * width), 0, 0);
         Atomic.fontRenderer.drawCenteredString(matrices, desc, width / 2f, height - 70, Color.WHITE.getRGB());
         desc = "";
         if (actualScroll != 0) {
-            Atomic.monoFontRenderer.drawString(new MatrixStack(), "Tip: Double right click to reset scroll", 2, 2, 0xFFFFFF);
+            Atomic.monoFontRenderer.drawString(matrices, "Tip: Double right click to reset scroll", 2, 2, 0xFFFFFF);
         }
-        Atomic.monoFontRenderer.drawCenteredString(new MatrixStack(), searchTerm.isEmpty() ? "Click any key to search" : ("Search (esc to clear): " + searchTerm), width / 2f, height - 11, 0xFFFFFF);
+        Atomic.monoFontRenderer.drawCenteredString(matrices, searchTerm.isEmpty() ? "Click any key to search" : ("Search (esc to clear): " + searchTerm), width / 2f, height - 11, 0xFFFFFF);
 
         super.render(matrices, mouseX, (int) (mouseY + trackedScroll), delta);
     }

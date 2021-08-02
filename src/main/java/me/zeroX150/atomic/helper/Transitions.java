@@ -24,4 +24,11 @@ public class Transitions {
         int an = (int) Math.floor(transition(value.getAlpha(), goal.getAlpha(), speed));
         return new Color(rn, gn, bn, an);
     }
+
+    public static double easeOutBack(double x) {
+        double c1 = 1.30158;
+        double c3 = c1 + 1;
+
+        return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+    }
 }
