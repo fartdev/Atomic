@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ParticleManager {
-    final List<Particle> particles = new ArrayList<>();
+    public final List<Particle> particles = new ArrayList<>();
 
     public ParticleManager(int amount) {
         int w = Atomic.client.getWindow().getScaledWidth();
@@ -24,10 +24,16 @@ public class ParticleManager {
     }
 
     public void tick() {
-        particles.forEach(particle -> particle.move(particles));
+        for (Particle particle : particles.toArray(particles.toArray(new Particle[0]))) {
+            particle.move(particles.toArray(new Particle[0]));
+        }
     }
 
     public void render() {
+        render(255);
+    }
+
+    public void render(int cursorAlpha) {
         int w = Atomic.client.getWindow().getScaledWidth();
         int h = Atomic.client.getWindow().getScaledHeight();
 
@@ -37,10 +43,11 @@ public class ParticleManager {
         Vec2f mouse = new Vec2f((float) renderX, (float) renderY);
         double md = 3 * (w + h);
 
-        for (Particle particle : particles) {
+        Particle[] pl = particles.toArray(new Particle[0]);
+        for (Particle particle : pl) {
             Renderer.fill(Renderer.modify(particle.color, -1, -1, -1, (int) MathHelper.clamp(particle.brightness * 255, 0, 255)), particle.x - 0.5, particle.y - 0.5, particle.x + .5, particle.y + .5);
             Vec2f v1 = new Vec2f((float) particle.x, (float) particle.y);
-            for (Particle particle1 : particles) {
+            for (Particle particle1 : pl) {
                 Vec2f v = new Vec2f((float) particle1.x, (float) particle1.y);
                 double dist = v1.distanceSquared(v);
                 if (dist < md) {
@@ -53,7 +60,7 @@ public class ParticleManager {
             if (mdist < md * 5) {
                 double dCalc = mdist / (md * 5);
                 double dCalcR = Math.abs(1 - dCalc);
-                Renderer.gradientLineScreen(Renderer.modify(particle.color, -1, -1, -1, (int) MathHelper.clamp(particle.brightness * 255 * dCalcR, 0, 255)), Renderer.modify(Client.getCurrentRGB(), -1, -1, -1, (int) (255 * dCalcR)), particle.x, particle.y, renderX, renderY);
+                Renderer.gradientLineScreen(Renderer.modify(particle.color, -1, -1, -1, (int) MathHelper.clamp(particle.brightness * 255 * dCalcR, 0, 255)), Renderer.modify(Client.getCurrentRGB(), -1, -1, -1, (int) (255 * dCalcR * (cursorAlpha / 255d))), particle.x, particle.y, renderX, renderY);
             }
         }
     }

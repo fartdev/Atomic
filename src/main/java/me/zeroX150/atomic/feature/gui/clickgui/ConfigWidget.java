@@ -23,7 +23,6 @@ public class ConfigWidget {
     double lastRenderX;
     double lastRenderY;
     boolean dragged = false;
-    double lastScrollOffset = 0;
 
     public ConfigWidget(Module p) {
         this.posX = 1;
@@ -177,12 +176,11 @@ public class ConfigWidget {
         double yDiff = posY - lastRenderY;
         lastRenderX += (xDiff / me.zeroX150.atomic.feature.module.impl.render.ClickGUI.smooth.getValue());
         lastRenderY += (yDiff / me.zeroX150.atomic.feature.module.impl.render.ClickGUI.smooth.getValue());
-        if (lastRenderY + lastScrollOffset > Atomic.client.getWindow().getScaledHeight() + 5)
+        if (lastRenderY > Atomic.client.getWindow().getScaledHeight() + 5)
             ClickGUI.INSTANCE.showModuleConfig(null);
     }
 
-    public void render(MatrixStack ms, int mx, int my, float delta, double scrollOffset) {
-        lastScrollOffset = scrollOffset;
+    public void render(MatrixStack ms, int mx, int my, float delta) {
         Renderer.fill(ms, ClickGUI.currentActiveTheme.h_exp(), lastRenderX - margin, lastRenderY - margin, lastRenderX + width + margin, lastRenderY + 9 + margin);
         Renderer.fill(ms, new Color(238, 37, 37, 255), lastRenderX + width + 1, lastRenderY - margin + 1, lastRenderX + width + margin - 1, lastRenderY + 9 + margin - 1);
         int maxOffset = (int) Math.ceil(9 + (margin * 2));

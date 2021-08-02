@@ -3,6 +3,7 @@ package me.zeroX150.atomic.feature.gui.clickgui;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.zeroX150.atomic.Atomic;
+import me.zeroX150.atomic.feature.gui.particles.ParticleManager;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleRegistry;
 import me.zeroX150.atomic.feature.module.ModuleType;
@@ -43,6 +44,7 @@ public class ClickGUI extends Screen {
     boolean closed = false;
     String desc = "";
     boolean alreadyInitialized = false;
+    ParticleManager particleManager = new ParticleManager(100);
 
     public ClickGUI() {
         super(Text.of(""));
@@ -56,6 +58,7 @@ public class ClickGUI extends Screen {
             d.lastRenderY = 0;
             d.posX = 0;
             d.posY = 0;
+            d.expanded = true;
             for (Module module : ModuleRegistry.getModules()) {
                 if (module.getModuleType() == value) {
                     Clickable w = new Clickable(module);
@@ -65,8 +68,6 @@ public class ClickGUI extends Screen {
             containers.add(d);
         }
         sort(true);
-        // example config:
-        // exploit:0,0:1;movement:1,0:0;combat:5,2:1
     }
 
     public void onFastTick() {
@@ -88,6 +89,7 @@ public class ClickGUI extends Screen {
             clicks--;
             clicks = MathHelper.clamp(clicks, 0, 3);
         }
+        particleManager.tick();
         super.tick();
     }
 
@@ -129,6 +131,7 @@ public class ClickGUI extends Screen {
 
     @Override
     protected void init() {
+        particleManager = new ParticleManager(100);
         alreadyInitialized = true;
         aProg = 1;
         closed = false;
@@ -238,12 +241,11 @@ public class ClickGUI extends Screen {
         bufferBuilder.end();
         BufferRenderer.draw(bufferBuilder);
         RenderSystem.disableBlend();
+        particleManager.render((int) (Math.abs(1 - aProgI) * 255));
         float scaleInv = (float) Transitions.easeOutBack(Math.abs(1 - aProg));
         float api = 1 - scaleInv;
-        matrices.push();
-        matrices.translate((aProgI * width) / 2f, (aProgI * height) / 2f, 0);
+        matrices.translate((api * width) / 2f, (api * height) / 2f, 0);
         matrices.scale(scaleInv, scaleInv, 1);
-        //matrices.translate(-aProgI * width, 0, 0);
         if (System.currentTimeMillis() - lastRender > 1) lastRender = System.currentTimeMillis();
         double logoSize = me.zeroX150.atomic.feature.module.impl.render.ClickGUI.logoSize.getValue();
         if (logoSize != 0) {
@@ -257,22 +259,19 @@ public class ClickGUI extends Screen {
             RenderSystem.defaultBlendFunc();
             RenderSystem.disableBlend();
         }
-        //matrices.translate(2 * aProgI * width, 0, 0);
         matrices.translate(0, trackedScroll, 0);
-        MatrixStack configStack = new MatrixStack();
-        configStack.translate((api * width), 0, 0);
-        if (currentConfig != null) currentConfig.render(configStack, mouseX, mouseY, delta, trackedScroll);
+        if (currentConfig != null) currentConfig.render(matrices, mouseX, (int) (mouseY + trackedScroll), delta);
         matrices.translate(0, -trackedScroll, 0);
+        matrices.push();
         for (Draggable container : containers) {
-            MatrixStack ms = new MatrixStack();
-            //ms.translate(aProgI * width, 0, 0);
-            ms.translate(0, trackedScroll, 0);
-            ms.translate((api * width) / 2f, (api * height) / 2f, 0);
-            ms.scale(scaleInv, scaleInv, 1);
-            container.render(ms, delta, api, trackedScroll);
+            matrices.push();
+            matrices.translate(0, trackedScroll, 0);
+            matrices.translate((api * width) / 2f, (api * height) / 2f, 0);
+            matrices.scale(scaleInv, scaleInv, 1);
+            container.render(matrices, delta, api, trackedScroll);
+            matrices.pop();
         }
         matrices.pop();
-        matrices.translate((api * width), 0, 0);
         Atomic.fontRenderer.drawCenteredString(matrices, desc, width / 2f, height - 70, Color.WHITE.getRGB());
         desc = "";
         if (actualScroll != 0) {
@@ -304,7 +303,7 @@ public class ClickGUI extends Screen {
             }
         }
         if (!flag && currentConfig != null) {
-            currentConfig.mouseClicked(mouseX, mouseY, button);
+            currentConfig.mouseClicked(mouseX, mouseY + trackedScroll, button);
         }
         if (!flag & button == 1) {
             clicks++;
@@ -314,7 +313,6 @@ public class ClickGUI extends Screen {
             if (clicks >= 3) {
                 for (Draggable container : containers) {
                     container.expanded = true;
-                    //showModuleConfig(null);
                 }
 
             }

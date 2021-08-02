@@ -6,7 +6,7 @@ import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Particle {
@@ -24,7 +24,7 @@ public class Particle {
         velocity = vel;
     }
 
-    public void move(List<Particle> rest) {
+    public void move(Particle[] rest) {
         double nx = x + velocity.x;
         double ny = y + velocity.y;
         int w = Atomic.client.getWindow().getScaledWidth();
@@ -50,7 +50,7 @@ public class Particle {
         double velXO = 0;
         double velYO = 0;
         double maxDist = Math.sqrt((w + h) * 3);
-        for (Particle particle : rest.stream().filter(v -> v != this).collect(Collectors.toList())) {
+        for (Particle particle : Arrays.stream(rest).filter(v -> v != this).collect(Collectors.toList())) {
             Vec3d p = new Vec3d(particle.x, particle.y, 0);
             Vec3d p1 = new Vec3d(this.x, this.y, 0);
             double d = p1.distanceTo(p);

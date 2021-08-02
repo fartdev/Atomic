@@ -104,7 +104,7 @@ public class Draggable {
         if (lastRenderY == -1) lastRenderY = posY;
         stack.translate(lastRenderX - getMargin() - getPaddingX(), lastRenderY - getMargin(), 0);
         double rotation = MathHelper.clamp(lrXDiff, -50, 50) * me.zeroX150.atomic.feature.module.impl.render.ClickGUI.dragFactor.getValue();
-        rotation += Math.sin(animProgInter * Math.PI * 2) * 10;
+        rotation += Math.sin(animProgInter * Math.PI * 2) * 4;
         stack.multiply(new Quaternion(new Vec3f(0, 0, 1), (float) (rotation), true));
         PositionD v = new PositionD(lastRenderX - getMargin() - getPaddingX(), lastRenderY - getMargin(), rotation);
         if (!recordedPositions.contains(v)) recordedPositions.add(v);
