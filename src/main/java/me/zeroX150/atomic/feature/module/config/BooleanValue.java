@@ -9,5 +9,6 @@ public class BooleanValue extends DynamicValue<Boolean> {
     public void setValue(Object value) {
         if (!(value instanceof Boolean)) return;
         this.value = (Boolean) value;
+        onValueChanged();
     }
 }

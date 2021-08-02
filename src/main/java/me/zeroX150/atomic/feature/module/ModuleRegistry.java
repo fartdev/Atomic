@@ -7,10 +7,7 @@ import me.zeroX150.atomic.feature.module.impl.combat.Criticals;
 import me.zeroX150.atomic.feature.module.impl.combat.Killaura;
 import me.zeroX150.atomic.feature.module.impl.exploit.*;
 import me.zeroX150.atomic.feature.module.impl.external.*;
-import me.zeroX150.atomic.feature.module.impl.misc.AntiParticleCrash;
-import me.zeroX150.atomic.feature.module.impl.misc.AutoFish;
-import me.zeroX150.atomic.feature.module.impl.misc.ChatSequence;
-import me.zeroX150.atomic.feature.module.impl.misc.InventoryCleaner;
+import me.zeroX150.atomic.feature.module.impl.misc.*;
 import me.zeroX150.atomic.feature.module.impl.movement.*;
 import me.zeroX150.atomic.feature.module.impl.render.*;
 import me.zeroX150.atomic.feature.module.impl.render.OreSim.OreSim;
@@ -108,6 +105,7 @@ public class ModuleRegistry {
         modules.add(new FastUse());
         modules.add(new AutoCone());
         modules.add(new CleanGUI());
+        modules.add(new Timer());
 
         modules = modules.stream().sorted(Comparator.comparingDouble(value -> -Atomic.fontRenderer.getStringWidth(value.getName()))).collect(Collectors.toList());
     }

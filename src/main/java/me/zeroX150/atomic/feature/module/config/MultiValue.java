@@ -21,6 +21,8 @@ public class MultiValue extends DynamicValue<String> {
         if (!(value instanceof String)) return;
         if (!possible.contains(value)) return;
         this.value = (String) value;
+
+        onValueChanged();
     }
 
     public void cycle() {

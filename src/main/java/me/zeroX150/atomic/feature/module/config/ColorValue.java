@@ -43,5 +43,7 @@ public class ColorValue extends DynamicValue<String> {
         }
         this.isRGB = isRGB;
         this.value = parsed.getRGB() + "";
+
+        onValueChanged();
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class DynamicValue<T> {
     public final List<SelectorRunnable> selectors = new ArrayList<>();
+    private final List<Runnable> onChangedListeners = new ArrayList<>();
     private final String key;
     protected T value;
     private String description = "";
@@ -22,6 +23,17 @@ public class DynamicValue<T> {
     public void setValue(Object value) {
         if (getType() != value.getClass()) return;
         this.value = (T) value;
+        onValueChanged();
+    }
+
+    protected void onValueChanged() {
+        for (Runnable onChangedListener : onChangedListeners) {
+            onChangedListener.run();
+        }
+    }
+
+    public void addChangeListener(Runnable r) {
+        onChangedListeners.add(r);
     }
 
     public String getKey() {

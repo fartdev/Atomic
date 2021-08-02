@@ -11,6 +11,7 @@
     "game.IMinecraftClientAccessor",
     "game.KeyboardMixin",
     "game.MinecraftClientMixin",
+    "game.RenderTickCounterAccessor",
     "game.SchemasMixin",
     "game.entity.ClientPlayerEntityMixin",
     "game.entity.ClientPlayerInteractionManagerMixin",

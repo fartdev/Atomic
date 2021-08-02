@@ -9,6 +9,7 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.mixin.game.IMinecraftClientAccessor;
+import me.zeroX150.atomic.mixin.game.RenderTickCounterAccessor;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.util.Session;
@@ -44,6 +45,16 @@ public class Client {
     // intellijsense just fucking breaks when i dont do it this way
     public static <T> T getValueFromBaritoneSetting(Settings$Setting<T> v) {
         return v.value;
+    }
+
+    public static float getClientTps() {
+        RenderTickCounterAccessor accessor = ((RenderTickCounterAccessor) ((IMinecraftClientAccessor) Atomic.client).getRenderTickCounter());
+        return 1000f / accessor.getTickTime();
+    }
+
+    public static void setClientTps(float tps) {
+        RenderTickCounterAccessor accessor = ((RenderTickCounterAccessor) ((IMinecraftClientAccessor) Atomic.client).getRenderTickCounter());
+        accessor.setTickTime(1000f / tps);
     }
 
     public static void drop(int index) {
