@@ -8,9 +8,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 public class KeyListenerBtn extends ButtonWidget {
+    final Module parent;
     public boolean listening = false;
     public long stoppedScanning = 0;
-    Module parent;
     int kc;
     int sc;
 

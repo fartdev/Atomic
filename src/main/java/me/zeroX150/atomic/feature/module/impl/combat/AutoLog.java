@@ -8,7 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 public class AutoLog extends Module {
-    DynamicValue<Integer> hpAmount = this.config.create("Health", 3).description("The amount of HP needed to issue a disconnect");
+    final DynamicValue<Integer> hpAmount = this.config.create("Health", 3).description("The amount of HP needed to issue a disconnect");
 
     public AutoLog() {
         super("AutoLog", "automatically leaves after a certain health is reached", ModuleType.COMBAT);

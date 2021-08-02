@@ -15,8 +15,8 @@ import net.minecraft.network.packet.c2s.play.*;
 import net.minecraft.util.math.Vec3d;
 
 public class Freecam extends Module {
-    SliderValue speed = (SliderValue) this.config.create("Speed", 1, 0, 20, 1).description("The speed to fly by");
-    BooleanValue blockInteractions = (BooleanValue) this.config.create("Block interactions", true).description("Whether or not to block interactions while in freecam");
+    final SliderValue speed = (SliderValue) this.config.create("Speed", 1, 0, 20, 1).description("The speed to fly by");
+    final BooleanValue blockInteractions = (BooleanValue) this.config.create("Block interactions", true).description("Whether or not to block interactions while in freecam");
     Vec3d startloc;
     float pitch = 0f;
     float yaw = 0f;

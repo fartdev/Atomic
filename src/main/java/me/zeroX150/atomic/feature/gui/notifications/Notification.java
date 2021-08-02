@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Notification {
+    public final String title;
+    public final String[] contents;
+    public final long creationDate;
+    public final long duration;
     public double posX;
     public double posY;
     public double renderPosX = 0;
     public double renderPosY = 0;
-    public String title;
-    public String[] contents;
-    public long creationDate;
-    public long duration;
 
     public Notification(long duration, String title, String... contents) {
         this.duration = duration;

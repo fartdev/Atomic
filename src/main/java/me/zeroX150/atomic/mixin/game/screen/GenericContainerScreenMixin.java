@@ -28,6 +28,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HandledScreen.class)
 public abstract class GenericContainerScreenMixin<T extends ScreenHandler> extends Screen {
+    final KeyBinding arrowRight = new KeyBinding("", GLFW.GLFW_KEY_RIGHT, "");
+    final KeyBinding arrowLeft = new KeyBinding("", GLFW.GLFW_KEY_LEFT, "");
+    final KeyBinding arrowUp = new KeyBinding("", GLFW.GLFW_KEY_UP, "");
+    final KeyBinding arrowDown = new KeyBinding("", GLFW.GLFW_KEY_DOWN, "");
     @Shadow
     @Final
     protected T handler;
@@ -37,10 +41,6 @@ public abstract class GenericContainerScreenMixin<T extends ScreenHandler> exten
     protected int y;
     boolean isSelecting = false;
     ButtonWidget bw;
-    KeyBinding arrowRight = new KeyBinding("", GLFW.GLFW_KEY_RIGHT, "");
-    KeyBinding arrowLeft = new KeyBinding("", GLFW.GLFW_KEY_LEFT, "");
-    KeyBinding arrowUp = new KeyBinding("", GLFW.GLFW_KEY_UP, "");
-    KeyBinding arrowDown = new KeyBinding("", GLFW.GLFW_KEY_DOWN, "");
 
     protected GenericContainerScreenMixin(Text title) {
         super(title);

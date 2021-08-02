@@ -14,8 +14,8 @@ import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
 public class EntityFly extends Module {
+    final Keybind down = new Keybind(GLFW.GLFW_KEY_LEFT_ALT);
     Entity lastRide = null;
-    Keybind down = new Keybind(GLFW.GLFW_KEY_LEFT_ALT);
 
     public EntityFly() {
         super("EntityFly", "boatfly but yes", ModuleType.MOVEMENT);

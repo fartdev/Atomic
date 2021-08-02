@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditServerInfoScreen extends Screen {
-    ServerInfo si;
+    final ServerInfo si;
+    final Screen parent;
     TextFieldWidget motd;
     TextFieldWidget pcount;
-    Screen parent;
 
     public EditServerInfoScreen(ServerInfo serverToEdit, Screen parent) {
         super(Text.of(""));
@@ -36,9 +36,7 @@ public class EditServerInfoScreen extends Screen {
         pcount.setMaxLength(65535);
         pcount.setText(si.playerCountLabel.getString());
         fw = 100;
-        ButtonWidget cancel = new ButtonWidget(width / 2 - fw - 3, height - 25, fw, 20, Text.of("Cancel"), button -> {
-            Atomic.client.openScreen(parent);
-        });
+        ButtonWidget cancel = new ButtonWidget(width / 2 - fw - 3, height - 25, fw, 20, Text.of("Cancel"), button -> Atomic.client.openScreen(parent));
         ButtonWidget save = new ButtonWidget(width / 2 + 3, height - 25, fw, 20, Text.of("Save"), button -> {
             if (pcount.getText().split("/").length == 2) {
                 String[] v = pcount.getText().split("/");

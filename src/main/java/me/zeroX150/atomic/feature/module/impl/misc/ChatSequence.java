@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatSequence extends Module {
-    public static List<String> messages = new ArrayList<>();
+    public static final List<String> messages = new ArrayList<>();
     public static long delay = 30;
     public static volatile boolean shouldRun = false;
     Thread runner = null;

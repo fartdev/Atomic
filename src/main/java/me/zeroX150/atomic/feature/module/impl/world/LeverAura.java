@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class LeverAura extends Module {
-    SliderValue amount = this.config.create("Clicks per tick", 1, 1, 50, 0);
+    final SliderValue amount = this.config.create("Clicks per tick", 1, 1, 50, 0);
 
     public LeverAura() {
         super("LeverAura", "has a spasm around levers in the area", ModuleType.WORLD);

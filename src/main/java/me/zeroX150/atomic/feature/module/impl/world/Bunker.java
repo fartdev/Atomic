@@ -29,7 +29,7 @@ public class Bunker extends Module {
         boolean isAir = true;
         BlockPos cp1 = null;
         while (isAir) {
-            if (incr(2)) {
+            if (incr()) {
                 setEnabled(false);
                 break;
             }
@@ -72,11 +72,11 @@ public class Bunker extends Module {
         if (current != null) Renderer.renderFilled(current, new Vec3d(1, 1, 1), Color.RED, matrices);
     }
 
-    boolean incr(double v) {
-        xP += v;
+    boolean incr() {
+        xP += 2;
         if (xP > 360) {
             xP %= 360;
-            yP += v;
+            yP += 2;
         }
         if (yP > 180) {
             yP = 0;

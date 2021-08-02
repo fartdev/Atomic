@@ -10,7 +10,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 
 public class BlockSpammer extends Module {
-    SliderValue timesPerTick = (SliderValue) this.config.create("Times per tick", 20, 1, 100, 0).description("How many times to interact per tick");
+    final SliderValue timesPerTick = (SliderValue) this.config.create("Times per tick", 20, 1, 100, 0).description("How many times to interact per tick");
 
     public BlockSpammer() {
         super("BlockSpammer", "uses a block a LOT of times per second", ModuleType.WORLD);

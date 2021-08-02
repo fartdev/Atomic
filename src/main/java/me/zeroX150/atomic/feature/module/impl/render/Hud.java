@@ -27,23 +27,20 @@ import java.util.Date;
 import java.util.List;
 
 public class Hud extends Module {
-    public SliderValue smoothSelectTransition = config.create("Selection smooth", 10, 1, 30, 1);
-    public BooleanValue betterHotbar = (BooleanValue) config.create("Better hotbar", true).description("Makes the hotbar sexier");
-    BooleanValue fps = (BooleanValue) config.create("FPS", true).description("Whether or not to show FPS");
-    BooleanValue tps = (BooleanValue) config.create("TPS", true).description("Whether or not to show TPS");
-    BooleanValue coords = (BooleanValue) config.create("Coordinates", true).description("Whether or not to show coordinates");
-    BooleanValue time = (BooleanValue) config.create("Time", true).description("Whether or not to show the current IRL time");
-    BooleanValue ping = (BooleanValue) config.create("Ping", true).description("Whether or not to show your ping");
-    BooleanValue bps = (BooleanValue) config.create("Speed", true).description("Whether or not to show your speed in blocks per second");
-    BooleanValue modules = (BooleanValue) config.create("Modules", true).description("Whether or not to show the enabled modules");
+    public final SliderValue smoothSelectTransition = config.create("Selection smooth", 10, 1, 30, 1);
+    public final BooleanValue betterHotbar = (BooleanValue) config.create("Better hotbar", true).description("Makes the hotbar sexier");
+    final BooleanValue fps = (BooleanValue) config.create("FPS", true).description("Whether or not to show FPS");
+    final BooleanValue tps = (BooleanValue) config.create("TPS", true).description("Whether or not to show TPS");
+    final BooleanValue coords = (BooleanValue) config.create("Coordinates", true).description("Whether or not to show coordinates");
+    final BooleanValue time = (BooleanValue) config.create("Time", true).description("Whether or not to show the current IRL time");
+    final BooleanValue ping = (BooleanValue) config.create("Ping", true).description("Whether or not to show your ping");
+    final BooleanValue bps = (BooleanValue) config.create("Speed", true).description("Whether or not to show your speed in blocks per second");
+    final BooleanValue modules = (BooleanValue) config.create("Modules", true).description("Whether or not to show the enabled modules");
+    final DateFormat df = new SimpleDateFormat("h:mm aa");
+    final DateFormat minSec = new SimpleDateFormat("mm:ss");
     long lastTimePacketReceived;
     double currentTps = 0;
-
     double rNoConnectionPosY = -10d;
-
-    DateFormat df = new SimpleDateFormat("h:mm aa");
-
-    DateFormat minSec = new SimpleDateFormat("mm:ss");
 
     public Hud() {
         super("Hud", "shows info about shit", ModuleType.RENDER);
@@ -181,10 +178,10 @@ public class Hud extends Module {
     }
 
     static class HudEntry {
-        public String t;
-        public String v;
-        public boolean renderTaskBar;
-        public boolean renderRTaskBar;
+        public final String t;
+        public final String v;
+        public final boolean renderTaskBar;
+        public final boolean renderRTaskBar;
 
         public HudEntry(String t, String v, boolean renderInTaskBar, boolean renderRightTaskBar) {
             this.t = t;

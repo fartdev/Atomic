@@ -23,9 +23,9 @@ import org.lwjgl.opengl.GL11;
 
 public class HomeScreen extends Screen {
     static boolean shownWelcome = false;
+    final ParticleManager pm = new ParticleManager(200);
+    final String t = "Atomic, made by ";
     boolean isMeteorLoaded = false;
-    ParticleManager pm = new ParticleManager(200);
-    String t = "Atomic, made by ";
 
     public HomeScreen() {
         super(Text.of("a"));

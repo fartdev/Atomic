@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ParticleManager {
-    List<Particle> particles = new ArrayList<>();
+    final List<Particle> particles = new ArrayList<>();
 
     public ParticleManager(int amount) {
         int w = Atomic.client.getWindow().getScaledWidth();

@@ -4,7 +4,7 @@ import me.zeroX150.atomic.Atomic;
 import net.minecraft.client.util.InputUtil;
 
 public class Keybind {
-    public int keycode;
+    public final int keycode;
     boolean pressedbefore = false;
 
     public Keybind(int kc) {

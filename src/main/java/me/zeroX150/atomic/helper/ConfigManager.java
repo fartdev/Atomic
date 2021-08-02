@@ -19,14 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigManager {
-    public static boolean loaded = false;
-    public static boolean enabled = false;
-
-    static List<Module> toBeEnabled = new ArrayList<>();
-
-    static File CONFIG_FILE;
-
-    static String TOP_NOTE = """
+    static final List<Module> toBeEnabled = new ArrayList<>();
+    static final File CONFIG_FILE;
+    static final String TOP_NOTE = """
             // !!! READ ME, BEFORE DOING ANYTHING IN HERE !!!
             // UNLESS YOU 100% KNOW WHAT YOU ARE DOING, NEVER SHARE THIS FILE WITH SOMEONE ELSE.
             // YOUR ALTS ARE SAVED IN HERE. UNLESS YOU KNOW HOW TO REMOVE THEM, DO NOT SHARE THIS FILE.
@@ -35,6 +30,8 @@ public class ConfigManager {
             // also uh, you could break stuff if you directly modify shit in here, so dont do that unless you know what you're doing.
             // back this shit up before doing anything in case you do a major fuck
             """;
+    public static boolean loaded = false;
+    public static boolean enabled = false;
 
     static {
         CONFIG_FILE = new File(Atomic.client.runDirectory.getAbsolutePath() + "/config.atomic");

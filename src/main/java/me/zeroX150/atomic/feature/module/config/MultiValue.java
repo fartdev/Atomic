@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 public class MultiValue extends DynamicValue<String> {
-    List<String> possible;
+    final List<String> possible;
 
     public MultiValue(String key, String value, String... values) {
         super(key, value);

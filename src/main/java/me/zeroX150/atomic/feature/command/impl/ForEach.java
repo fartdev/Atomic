@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ForEach extends Command {
-    ExecutorService runner = Executors.newFixedThreadPool(1);
+    final ExecutorService runner = Executors.newFixedThreadPool(1);
 
     public ForEach() {
         super("ForEach", "Do something for each player", "foreach", "for", "fe");

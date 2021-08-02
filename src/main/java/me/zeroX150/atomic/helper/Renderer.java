@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 
 public class Renderer {
-    public static Identifier OPTIONS_BACKGROUND_TEXTURE = new Identifier("atomic", "background.jpg");
+    public static final Identifier OPTIONS_BACKGROUND_TEXTURE = new Identifier("atomic", "background.jpg");
 
 
     public static void renderOutlineInternNoTranslate(Vec3d start, Vec3d dimensions, MatrixStack stack, BufferBuilder buffer) {

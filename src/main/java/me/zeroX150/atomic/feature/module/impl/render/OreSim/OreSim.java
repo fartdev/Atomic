@@ -33,14 +33,14 @@ import java.util.*;
 
 public class OreSim extends Module {
 
+    final SliderValue chunkRange;
+    final DynamicValue<String> seedInput;
+    final MultiValue airCheck;
+    final MultiValue version;
     private final HashMap<Long, HashMap<Ore.Type, HashSet<Vec3d>>> chunkRenderers = new HashMap<>();
     private final HashSet<Vec3d> blackList = new HashSet<>();
     public boolean automine = false;
     List<Ore> oreConfig;
-    SliderValue chunkRange;
-    DynamicValue<String> seedInput;
-    MultiValue airCheck;
-    MultiValue version;
     String versionString;
     private Long worldSeed = null;
     private ChunkPos prevOffset = new ChunkPos(0, 0);
@@ -174,9 +174,7 @@ public class OreSim extends Module {
         long chunkKey = (long) chunkX + ((long) chunkZ << 32);
         if (!chunkRenderers.containsKey(chunkKey)) return baritoneGoals;
 
-        oreConfig.stream().filter(config -> config.enabled.getValue()).forEach(ore -> {
-            baritoneGoals.addAll(chunkRenderers.get(chunkKey).getOrDefault(ore.type, new HashSet<>()));
-        });
+        oreConfig.stream().filter(config -> config.enabled.getValue()).forEach(ore -> baritoneGoals.addAll(chunkRenderers.get(chunkKey).getOrDefault(ore.type, new HashSet<>())));
         return baritoneGoals;
     }
 

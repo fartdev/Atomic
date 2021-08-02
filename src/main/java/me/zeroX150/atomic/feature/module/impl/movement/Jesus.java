@@ -14,7 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 public class Jesus extends Module {
     public static MultiValue mode;
 
-    SliderValue velStrength = this.config.create("Velocity strength", 0.1, 0.001, 0.3, 3);
+    final SliderValue velStrength = this.config.create("Velocity strength", 0.1, 0.001, 0.3, 3);
 
     public Jesus() {
         super("Jesus", "water is no enemy anymore", ModuleType.MOVEMENT);

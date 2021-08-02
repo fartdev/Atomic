@@ -23,6 +23,8 @@ import java.awt.*;
 @Mixin(ClickableWidget.class)
 public abstract class ButtonWidgetMixin {
 
+    final Color unselectedColor = new Color(25, 44, 49, 50);
+    final Color disabledColor = new Color(0, 0, 0, 70);
     @Shadow
     public int x;
     @Shadow
@@ -33,8 +35,6 @@ public abstract class ButtonWidgetMixin {
     protected int width;
     @Shadow
     protected int height;
-    Color unselectedColor = new Color(25, 44, 49, 50);
-    Color disabledColor = new Color(0, 0, 0, 70);
     long lastCache = 0;
     double timer = 0;
 

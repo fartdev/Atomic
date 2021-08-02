@@ -8,7 +8,7 @@ import java.util.Map;
 public class Events {
 
     public static class Packets {
-        static Map<PacketEvents, List<Handler>> HANDLERS = new HashMap<>();
+        static final Map<PacketEvents, List<Handler>> HANDLERS = new HashMap<>();
 
         public static void registerEventHandler(PacketEvents event, Handler handler) {
             if (!HANDLERS.containsKey(event)) HANDLERS.put(event, new ArrayList<>());
@@ -30,7 +30,7 @@ public class Events {
     }
 
     public static class Rendering {
-        static Map<RenderingEvents, List<Handler>> HANDLERS = new HashMap<>();
+        static final Map<RenderingEvents, List<Handler>> HANDLERS = new HashMap<>();
 
         public static void registerEventHandler(RenderingEvents event, Handler handler) {
             if (!HANDLERS.containsKey(event)) HANDLERS.put(event, new ArrayList<>());

@@ -37,7 +37,7 @@ public class Themes {
                         9
                 )
         );
-        Palette p;
+        final Palette p;
 
         Theme(Palette palette) {
             this.p = palette;

@@ -15,10 +15,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class Draggable {
-    public String title;
-    List<PositionD> recordedPositions = new ArrayList<>();
+    public final String title;
+    final List<PositionD> recordedPositions = new ArrayList<>();
+    final double width = 100;
+    final List<Clickable> children = new ArrayList<>();
     double animProg = 0;
-    double width = 100;
     double posX;
     double posY;
     double lastRenderX = -1;
@@ -28,7 +29,6 @@ public class Draggable {
     boolean expanded;
     boolean dragged = false;
     long lastRender = System.currentTimeMillis();
-    List<Clickable> children = new ArrayList<>();
     double lrXDiff = 0;
 
     public Draggable(String title, boolean isExpanded) {
@@ -79,7 +79,8 @@ public class Draggable {
         lastRenderX -= nxDiff;
         lastRenderY -= nyDiff;
         if (trackedLastRenderX == -1) trackedLastRenderX = lastRenderX;
-        if (trackedLastRenderY == -1) trackedLastRenderY = lastRenderY;
+        if (trackedLastRenderY == -1) {
+        }
         lrXDiff = lastRenderX - trackedLastRenderX;
         trackedLastRenderX = lastRenderX;
         trackedLastRenderY = lastRenderY;

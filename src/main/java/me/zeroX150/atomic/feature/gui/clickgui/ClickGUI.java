@@ -27,11 +27,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ClickGUI extends Screen {
+    public static final Identifier LOGO = new Identifier("atomic", "logo.png");
     public static ClickGUI INSTANCE;
-
     public static Themes.Palette currentActiveTheme = Themes.Theme.ATOMIC.getPalette();
-
-    public static Identifier LOGO = new Identifier("atomic", "logo.png");
+    final List<Draggable> containers = new ArrayList<>();
     public String searchTerm = "";
     public ConfigWidget currentConfig = null;
     double aProg = 1.0;
@@ -40,8 +39,6 @@ public class ClickGUI extends Screen {
     double trackedScroll = 0;
     double actualScroll = 0;
     long lastRender = System.currentTimeMillis();
-
-    List<Draggable> containers = new ArrayList<>();
     int currentSortMode = 0;
     boolean closed = false;
     String desc = "";
@@ -148,12 +145,8 @@ public class ClickGUI extends Screen {
                 container.expanded = false;
             }
         });
-        ButtonWidget opt = new ButtonWidget(width - offY - 42 - 1 - 100, height - off, 100, 20, Text.of("Options"), button -> {
-            showModuleConfig(ModuleRegistry.getByClass(ClientConfig.class));
-        });
-        ButtonWidget opt1 = new ButtonWidget(width - offY - 42 - 1 - 100 - 1 - 100, height - off, 100, 20, Text.of("ClickGUI options"), button -> {
-            showModuleConfig(ModuleRegistry.getByClass(me.zeroX150.atomic.feature.module.impl.render.ClickGUI.class));
-        });
+        ButtonWidget opt = new ButtonWidget(width - offY - 42 - 1 - 100, height - off, 100, 20, Text.of("Options"), button -> showModuleConfig(ModuleRegistry.getByClass(ClientConfig.class)));
+        ButtonWidget opt1 = new ButtonWidget(width - offY - 42 - 1 - 100 - 1 - 100, height - off, 100, 20, Text.of("ClickGUI options"), button -> showModuleConfig(ModuleRegistry.getByClass(me.zeroX150.atomic.feature.module.impl.render.ClickGUI.class)));
         addDrawableChild(sort);
         addDrawableChild(expand);
         addDrawableChild(retract);

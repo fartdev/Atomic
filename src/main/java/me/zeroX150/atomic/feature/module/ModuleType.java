@@ -4,7 +4,7 @@ public enum ModuleType {
     MOVEMENT("Movement"), RENDER("Render"), MISC("Miscellaneous"), COMBAT("Combat"), WORLD("World"), EXPLOIT("Exploit"), HIDDEN("");
 
 
-    String name;
+    final String name;
 
     ModuleType(String n) {
         this.name = n;

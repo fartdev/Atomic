@@ -56,8 +56,4 @@ public class TestModule extends Module {
 
     }
 
-    @Override
-    public void onFastTick() {
-
-    }
 }

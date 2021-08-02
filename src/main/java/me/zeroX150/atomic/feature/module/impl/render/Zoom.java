@@ -15,9 +15,9 @@ import net.minecraft.util.math.MathHelper;
 public class Zoom extends Module {
     static long enabledTime = 0;
     static SliderValue finalFov;
+    final BooleanValue hold = (BooleanValue) this.config.create("Hold", true).description("Whether or not to disable the module when the keybind is unpressed");
     Keybind kb;
     double msens = 0.5d;
-    BooleanValue hold = (BooleanValue) this.config.create("Hold", true).description("Whether or not to disable the module when the keybind is unpressed");
 
     public Zoom() {
         super("Zoom", "ok zoomer", ModuleType.RENDER);

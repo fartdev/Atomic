@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModuleConfig {
+    final List<DynamicValue<?>> config = new ArrayList<>();
     public boolean organizeClickGUIList = true;
-    List<DynamicValue<?>> config = new ArrayList<>();
 
     private void addProxy(DynamicValue<?> v) {
         config.add(v);

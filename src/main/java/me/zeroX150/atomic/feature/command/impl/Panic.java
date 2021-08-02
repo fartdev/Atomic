@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Panic extends Command {
-    List<Module> stored = new ArrayList<>();
+    final List<Module> stored = new ArrayList<>();
 
     public Panic() {
         super("Panic", "oh shit", "panic", "p", "disableall", "dall", "fuck");

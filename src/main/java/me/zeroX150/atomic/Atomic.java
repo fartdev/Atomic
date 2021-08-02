@@ -14,15 +14,15 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@SuppressWarnings("BusyWait")
 public class Atomic implements ModInitializer {
 
     public static final String MOD_ID = "atomic";
     public static final String MOD_NAME = "Atomic client";
+    public static final MinecraftClient client = MinecraftClient.getInstance();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static FontRenderer fontRenderer;
     public static FontRenderer monoFontRenderer;
-    public static MinecraftClient client = MinecraftClient.getInstance();
-    public static Logger LOGGER = LogManager.getLogger();
-
     public static Thread FAST_TICKER;
 
     public static void log(Level level, String message) {

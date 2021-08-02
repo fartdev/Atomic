@@ -15,18 +15,13 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class ServerInfoScreen extends Screen {
-    static List<Double> c2sLog = new ArrayList<>();
-    static List<Double> s2cLog = new ArrayList<>();
+    static final List<Double> c2sLog = new ArrayList<>();
+    static final List<Double> s2cLog = new ArrayList<>();
+    final int margin = 2;
     int timer = 0;
-    int margin = 2;
 
     public ServerInfoScreen() {
         super(Text.of(""));
-    }
-
-    @Override
-    protected void init() {
-        super.init();
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Queue<T> {
-    List<T> queue = new ArrayList<>();
+    final List<T> queue = new ArrayList<>();
 
     public Queue(List<T> elements) {
         queue.addAll(elements);

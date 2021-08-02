@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationRenderer {
-    public static List<Notification> notifications = new ArrayList<>();
+    public static final List<Notification> notifications = new ArrayList<>();
 
     static long lastRender = System.currentTimeMillis();
 

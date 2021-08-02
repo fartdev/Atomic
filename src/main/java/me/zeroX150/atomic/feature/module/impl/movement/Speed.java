@@ -11,9 +11,9 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 
 public class Speed extends Module {
-    MultiValue mode = (MultiValue) this.config.create("Mode", "Vanilla", "Vanilla", "BHop", "Legit", "Minihop").description("The mode");
-    SliderValue newSpeed = (SliderValue) this.config.create("Speed multiplier", 1, 0, 5, 1).description("The speed multiplier");
-    SliderValue bhopDown = (SliderValue) this.config.create("Down velocity", 1, -0.7, 3, 2).description("How fast to go down on bhop");
+    final MultiValue mode = (MultiValue) this.config.create("Mode", "Vanilla", "Vanilla", "BHop", "Legit", "Minihop").description("The mode");
+    final SliderValue newSpeed = (SliderValue) this.config.create("Speed multiplier", 1, 0, 5, 1).description("The speed multiplier");
+    final SliderValue bhopDown = (SliderValue) this.config.create("Down velocity", 1, -0.7, 3, 2).description("How fast to go down on bhop");
 
     double prev = 0.1;
 

@@ -7,7 +7,7 @@ import me.zeroX150.atomic.feature.module.config.DynamicValue;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class NameProtect extends Module {
-    DynamicValue<String> replacer = this.config.create("Replace name with", "Me");
+    final DynamicValue<String> replacer = this.config.create("Replace name with", "Me");
 
     public NameProtect() {
         super("NameProtect", "Replaces your username with something else", ModuleType.MISC);

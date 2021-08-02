@@ -16,7 +16,7 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
  */
 public class NoFall extends Module {
     public static MultiValue mode;
-    SliderValue fallDist = (SliderValue) this.config.create("Fall distance", 3, 0, 10, 1).description("The distance to fall for to enable the module");
+    final SliderValue fallDist = (SliderValue) this.config.create("Fall distance", 3, 0, 10, 1).description("The distance to fall for to enable the module");
 
     public NoFall() {
         super("NoFall", "no fall damage", ModuleType.MOVEMENT);

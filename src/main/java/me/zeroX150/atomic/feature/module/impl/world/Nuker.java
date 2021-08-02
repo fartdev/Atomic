@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Nuker extends Module {
-    List<BlockPos> renders = new ArrayList<>();
-    SliderValue range = (SliderValue) this.config.create("Range", 3, 0, 4, 1).description("The range to nuke by");
-    SliderValue blocksPerTick = (SliderValue) this.config.create("Blocks per tick", 1, 1, 20, 0).description("The amount of blocks to destroy per tick");
-    SliderValue delay = (SliderValue) this.config.create("Delay", 5, 0, 20, 0).description("The delay before breaking blocks");
-    BooleanValue ignoreXray = (BooleanValue) this.config.create("Ignore xray", true).description("Whether or not to ignore xray blocks");
+    final List<BlockPos> renders = new ArrayList<>();
+    final SliderValue range = (SliderValue) this.config.create("Range", 3, 0, 4, 1).description("The range to nuke by");
+    final SliderValue blocksPerTick = (SliderValue) this.config.create("Blocks per tick", 1, 1, 20, 0).description("The amount of blocks to destroy per tick");
+    final SliderValue delay = (SliderValue) this.config.create("Delay", 5, 0, 20, 0).description("The delay before breaking blocks");
+    final BooleanValue ignoreXray = (BooleanValue) this.config.create("Ignore xray", true).description("Whether or not to ignore xray blocks");
     int delayPassed = 0;
 
     public Nuker() {

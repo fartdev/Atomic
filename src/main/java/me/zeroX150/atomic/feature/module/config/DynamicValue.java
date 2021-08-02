@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicValue<T> {
+    public final List<SelectorRunnable> selectors = new ArrayList<>();
     private final String key;
-    public List<SelectorRunnable> selectors = new ArrayList<>();
     protected T value;
     private String description = "";
 

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(CreditsScreen.class)
 public class CreditsScreenMixin {
-    Identifier nomodV = new Identifier("nomod.textures/gui/options_background.png");
+    final Identifier nomodV = new Identifier("nomod.textures/gui/options_background.png");
 
     @Redirect(method = "renderBackground", at = @At(
             value = "FIELD",

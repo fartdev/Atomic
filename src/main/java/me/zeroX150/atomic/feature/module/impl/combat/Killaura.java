@@ -23,15 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Killaura extends Module {
-    BooleanValue capRangeAtMax = (BooleanValue) this.config.create("Max range", true).description("Whether or not to set the range to the max");
-    SliderValue range = (SliderValue) this.config.create("Range", 3.2, 0.1, 7, 2).description("The range to select entities by");
-    SliderValue delay = (SliderValue) this.config.create("Delay", 0, 0, 20, 0).description("The delay before attacking");
-    BooleanValue automaticalDelay = (BooleanValue) this.config.create("Auto delay", true).description("Whether or not to automatically pick a delay based on your weapon");
+    final BooleanValue capRangeAtMax = (BooleanValue) this.config.create("Max range", true).description("Whether or not to set the range to the max");
+    final SliderValue range = (SliderValue) this.config.create("Range", 3.2, 0.1, 7, 2).description("The range to select entities by");
+    final SliderValue delay = (SliderValue) this.config.create("Delay", 0, 0, 20, 0).description("The delay before attacking");
+    final BooleanValue automaticalDelay = (BooleanValue) this.config.create("Auto delay", true).description("Whether or not to automatically pick a delay based on your weapon");
 
-    MultiValue mode = (MultiValue) this.config.create("Mode", "Single", "Single", "Multi").description("The mode");
+    final MultiValue mode = (MultiValue) this.config.create("Mode", "Single", "Single", "Multi").description("The mode");
 
-    BooleanValue attackMobs = (BooleanValue) this.config.create("Attack mobs", true).description("Whether or not to attack mobs");
-    BooleanValue attackPlayers = (BooleanValue) this.config.create("Attack players", true).description("Whether or not to attack players");
+    final BooleanValue attackMobs = (BooleanValue) this.config.create("Attack mobs", true).description("Whether or not to attack mobs");
+    final BooleanValue attackPlayers = (BooleanValue) this.config.create("Attack players", true).description("Whether or not to attack players");
 
     int delayPassed = 0;
 

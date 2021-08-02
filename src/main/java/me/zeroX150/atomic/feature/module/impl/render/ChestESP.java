@@ -19,12 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ChestESP extends Module {
-    SliderValue range = (SliderValue) this.config.create("Range", 30, 10, 100, 0).description("The range to scan for chests in");
-    List<RenderBlock> blocksToRender = new ArrayList<>();
-    Map<Block, Color> renders = new HashMap<>();
-    Thread updater;
+    final SliderValue range = (SliderValue) this.config.create("Range", 30, 10, 100, 0).description("The range to scan for chests in");
+    final List<RenderBlock> blocksToRender = new ArrayList<>();
+    final Map<Block, Color> renders = new HashMap<>();
+    final Thread updater;
     int t = 0;
 
+    @SuppressWarnings("BusyWait")
     public ChestESP() {
         super("ChestESP", "shows all chests", ModuleType.RENDER);
         renders.put(Blocks.CHEST, new Color(1, 161, 182));

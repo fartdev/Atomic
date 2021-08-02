@@ -21,8 +21,8 @@ import java.awt.*;
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
 
+    final Hud c = (Hud) ModuleRegistry.getByClass(Hud.class);
     double interpolatedSlotValue = 0;
-    Hud c = (Hud) ModuleRegistry.getByClass(Hud.class);
     @Shadow
     private int scaledHeight;
     @Shadow

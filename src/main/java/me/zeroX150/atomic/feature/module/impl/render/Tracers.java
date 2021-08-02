@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class Tracers extends Module {
-    BooleanValue fancy = (BooleanValue) this.config.create("Fancy tracers", false).description("Whether or not to show fancy tracers");
-    BooleanValue entities = (BooleanValue) this.config.create("Show Entities", false).description("Whether or not to show entities");
-    BooleanValue players = (BooleanValue) this.config.create("Show Players", true).description("Whether or not to show players");
+    final BooleanValue fancy = (BooleanValue) this.config.create("Fancy tracers", false).description("Whether or not to show fancy tracers");
+    final BooleanValue entities = (BooleanValue) this.config.create("Show Entities", false).description("Whether or not to show entities");
+    final BooleanValue players = (BooleanValue) this.config.create("Show Players", true).description("Whether or not to show players");
 
     public Tracers() {
         super("Tracers", "shows where shit is", ModuleType.RENDER);

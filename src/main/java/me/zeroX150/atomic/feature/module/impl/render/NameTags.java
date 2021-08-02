@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class NameTags extends Module {
-    Map<UUID, Double> trackedProgress = new HashMap<>();
+    final Map<UUID, Double> trackedProgress = new HashMap<>();
 
     public NameTags() {
         super("NameTags", "big nametag.mp4", ModuleType.RENDER);

@@ -11,8 +11,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 
 public class AntiParticleCrash extends Module {
-    SliderValue limit = (SliderValue) this.config.create("Particle limit", 100_000, 10_000, 5_000_000, 0).description("Max amount of particles a single packet can have");
-    BooleanValue notify = (BooleanValue) this.config.create("Notify", true).description("Notify you when a packet was terminated");
+    final SliderValue limit = (SliderValue) this.config.create("Particle limit", 100_000, 10_000, 5_000_000, 0).description("Max amount of particles a single packet can have");
+    final BooleanValue notify = (BooleanValue) this.config.create("Notify", true).description("Notify you when a packet was terminated");
     int attempts = 0;
 
     public AntiParticleCrash() {

@@ -14,7 +14,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.List;
 
 public class XRAY extends Module {
-    public static List<Block> blocks = Lists.newArrayList();
+    public static final List<Block> blocks = Lists.newArrayList();
 
     public XRAY() {
         super("XRAY", "\"yea hold on im going mining rq\"", ModuleType.WORLD);

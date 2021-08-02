@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FarmingAura extends Module {
-    SliderValue max = this.config.create("Blocks per tick", 3, 1, 20, 0);
+    final SliderValue max = this.config.create("Blocks per tick", 3, 1, 20, 0);
 
     public FarmingAura() {
         super("FarmingAura", "farms", ModuleType.WORLD);

@@ -18,10 +18,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WelcomeOverlay extends Overlay {
-    String[] texts = new String[]{
+    final String[] texts = new String[]{
             "Loading...",
             "Welcome, " + Atomic.client.getSession().getUsername() + ", to Atomic."
     };
+    final List<String> logs = new ArrayList<>();
     double d = 0;
     boolean done = false;
     boolean decl = false;
@@ -29,7 +30,6 @@ public class WelcomeOverlay extends Overlay {
     boolean finishedLoading = false;
     boolean isLoading = false;
     Thread loader;
-    List<String> logs = new ArrayList<>();
 
     void log(String v) {
         logs.add(v);

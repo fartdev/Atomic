@@ -19,7 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class Scaffold extends Module {
-    SliderValue extend = this.config.create("Extend", 3, 0, 5, 1);
+    final SliderValue extend = this.config.create("Extend", 3, 0, 5, 1);
 
     public Scaffold() {
         super("Scaffold", "scaffold", ModuleType.WORLD);

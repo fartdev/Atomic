@@ -28,9 +28,4 @@ public class LivingEntityRendererMixin {
         return oldValue;
     }
 
-    /*@Inject(method = "render", at = @At("HEAD"))
-    public <T extends LivingEntity> void renderInject(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        Rotations.update();
-    }*/
-
 }

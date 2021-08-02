@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.*;
 
 public class ConfigWidget {
-    public Module parent;
-    double margin = 4;
+    public final Module parent;
+    final double margin = 4;
+    final double width = 200;
+    final Map<DynamicValue<?>, List<ClickableWidget>> children = new LinkedHashMap<>();
     double posX;
     double posY;
     double lastRenderX;
     double lastRenderY;
-    double width = 200;
     boolean dragged = false;
-    Map<DynamicValue<?>, List<ClickableWidget>> children = new LinkedHashMap<>();
     double lastScrollOffset = 0;
 
     public ConfigWidget(Module p) {

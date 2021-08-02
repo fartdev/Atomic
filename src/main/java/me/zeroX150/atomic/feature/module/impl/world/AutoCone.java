@@ -23,11 +23,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AutoCone extends Module {
-    SliderValue rad = (SliderValue) this.config.create("Radius", 6, 3, 10, 1).description("How wide the cone is");
-    SliderValue height = (SliderValue) this.config.create("Height", 6, 3, 15, 1).description("How big the cone is");
+    final SliderValue rad = (SliderValue) this.config.create("Radius", 6, 3, 10, 1).description("How wide the cone is");
+    final SliderValue height = (SliderValue) this.config.create("Height", 6, 3, 15, 1).description("How big the cone is");
+    final BooleanValue place = (BooleanValue) this.config.create("Place blocks", false).description("Places the cone automatically, if you're near it");
     Vec3d startPos = Vec3d.ZERO;
-    BooleanValue place = (BooleanValue) this.config.create("Place blocks", false).description("Places the cone automatically, if you're near it");
-
     List<BlockPos> cached = new ArrayList<>();
 
     public AutoCone() {

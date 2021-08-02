@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KeybindManager {
-    public static Map<Module, Keybind> keybindMap = new HashMap<>();
+    public static final Map<Module, Keybind> keybindMap = new HashMap<>();
 
     public static void init() {
         for (Module module : ModuleRegistry.getModules()) {

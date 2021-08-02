@@ -12,7 +12,7 @@ import net.minecraft.item.Items;
 import java.util.Arrays;
 
 public class InventoryCleaner extends Module {
-    Item[] useless = new Item[]{
+    final Item[] useless = new Item[]{
             Items.GRANITE,
             Items.POLISHED_GRANITE,
             Items.DIORITE,
@@ -111,7 +111,7 @@ public class InventoryCleaner extends Module {
     public void tick() {
         for (int i = 0; i < 36; i++) {
             ItemStack s = Atomic.client.player.getInventory().getStack(i);
-            if (Arrays.stream(useless).filter(item -> item == s.getItem()).count() != 0) {
+            if (Arrays.stream(useless).anyMatch(item -> item == s.getItem())) {
                 Client.drop(i);
                 break;
             }

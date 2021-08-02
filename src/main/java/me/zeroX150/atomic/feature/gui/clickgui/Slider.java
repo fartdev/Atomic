@@ -11,12 +11,12 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 
 public class Slider extends ClickableWidget {
-    double min;
-    double max;
+    final double min;
+    final double max;
+    final SliderValue v;
+    final int prec;
     double value;
     boolean dragged = false;
-    SliderValue v;
-    int prec;
 
     public Slider(int x, int y, int width, SliderValue conf) {
         super(x - 1, y - 1, width + 1, 12, Text.of(conf.getKey()));

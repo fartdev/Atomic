@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
-    Module noRender = ModuleRegistry.getByClass(NoRender.class);
+    final Module noRender = ModuleRegistry.getByClass(NoRender.class);
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
     public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo ci) {

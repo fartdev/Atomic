@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
-    Module noRender = ModuleRegistry.getByClass(NoRender.class);
+    final Module noRender = ModuleRegistry.getByClass(NoRender.class);
     private boolean vb;
     private boolean dis;
 

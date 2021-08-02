@@ -11,9 +11,9 @@ import net.minecraft.util.math.MathHelper;
 import java.awt.*;
 
 public class Clickable {
-    Module parent;
-    double margin = 4;
-    double width = 100;
+    final Module parent;
+    final double margin = 4;
+    final double width = 100;
     double animProg = 0;
     double animProg1 = 0;
 

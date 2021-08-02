@@ -15,9 +15,9 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Arrays;
 
 public class GodBridge extends Module {
-    BooleanValue courseCorrect = (BooleanValue) this.config.create("Course correct", true).description("Prevent you from falling off the track by accident");
-    float mOffset = 0.20f;
-    Direction[] allowedSides = new Direction[]{
+    final BooleanValue courseCorrect = (BooleanValue) this.config.create("Course correct", true).description("Prevent you from falling off the track by accident");
+    final float mOffset = 0.20f;
+    final Direction[] allowedSides = new Direction[]{
             Direction.NORTH,
             Direction.EAST,
             Direction.SOUTH,

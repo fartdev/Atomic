@@ -12,7 +12,7 @@ import net.minecraft.screen.slot.SlotActionType;
 
 public class SlotSpammer extends Module {
     public static Slot slotToSpam = null;
-    SliderValue amountPerTick = (SliderValue) this.config.create("Amount / tick", 5, 1, 100, 0).description("The amount of clicks per tick to simulate");
+    final SliderValue amountPerTick = (SliderValue) this.config.create("Amount / tick", 5, 1, 100, 0).description("The amount of clicks per tick to simulate");
 
     public SlotSpammer() {
         super("SlotSpammer", "Spams slots", ModuleType.MISC);
@@ -26,7 +26,7 @@ public class SlotSpammer extends Module {
             return;
         }
         for (int i = 0; i < amountPerTick.getValue(); i++) {
-            Atomic.client.interactionManager.clickSlot(((HandledScreen) Atomic.client.currentScreen).getScreenHandler().syncId, slotToSpam.id, 0, SlotActionType.PICKUP, Atomic.client.player);
+            Atomic.client.interactionManager.clickSlot(((HandledScreen<?>) Atomic.client.currentScreen).getScreenHandler().syncId, slotToSpam.id, 0, SlotActionType.PICKUP, Atomic.client.player);
         }
     }
 

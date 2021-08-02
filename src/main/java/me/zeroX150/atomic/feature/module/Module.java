@@ -5,10 +5,10 @@ import me.zeroX150.atomic.feature.module.config.ModuleConfig;
 import net.minecraft.client.util.math.MatrixStack;
 
 public abstract class Module {
+    public final ModuleConfig config;
     private final String name;
     private final String description;
     private final ModuleType moduleType;
-    public ModuleConfig config;
     private boolean enabled = false;
 
     public Module(String n, String d, ModuleType type) {

@@ -7,7 +7,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 public class Toggleable extends ButtonWidget {
-    BooleanValue parent;
+    final BooleanValue parent;
 
     public Toggleable(int x, int y, int width, BooleanValue parent) {
         super(x, y, width, 12, Text.of(parent.getValue() ? "Enabled" : "Disabled"), (buttonWidget) -> {

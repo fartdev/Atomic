@@ -21,18 +21,18 @@ public class Ore {
     private static final BooleanValue emerald = new BooleanValue("Emerald", false);
     private static final BooleanValue quartz = new BooleanValue("Quartz", false);
     private static final BooleanValue debris = new BooleanValue("Ancient Debris", false);
-    public Type type;
-    public String dimension;
-    public HashMap<String, Integer> index;
+    public final Type type;
+    public final String dimension;
+    public final HashMap<String, Integer> index;
+    public final boolean depthAverage;
+    public final Generator generator;
+    public final int size;
+    public final BooleanValue enabled;
+    public final Color color;
     public int step;
     public IntProvider count;
-    public boolean depthAverage;
     public int minY;
     public int maxY;
-    public Generator generator;
-    public int size;
-    public BooleanValue enabled;
-    public Color color;
 
     Ore(Type type, String dimension, HashMap<String, Integer> index, int step, IntProvider count, boolean depthAverage, int minY, int maxY, Generator generator, int size, BooleanValue enabled, Color color) {
         this.type = type;

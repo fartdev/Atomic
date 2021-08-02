@@ -11,8 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class AntiVoid extends Module {
+    final SliderValue distance = (SliderValue) this.config.create("Fall dist", 3, 2, 10, 1).description("how many blocks to fall before tping");
     Vec3d lastOnGround = null;
-    SliderValue distance = (SliderValue) this.config.create("Fall dist", 3, 2, 10, 1).description("how many blocks to fall before tping");
 
     public AntiVoid() {
         super("AntiFall", "Prevents you from falling too far", ModuleType.MOVEMENT);

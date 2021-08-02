@@ -17,10 +17,10 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class ClickFly extends Module {
-    BooleanValue autoDisable = (BooleanValue) this.config.create("Auto disable", false).description("Automatically disable when the goal is reached");
-    BooleanValue smartTarget = (BooleanValue) this.config.create("Smart target", true).description("Whether or not to target the goal with some iq");
+    final BooleanValue autoDisable = (BooleanValue) this.config.create("Auto disable", false).description("Automatically disable when the goal is reached");
+    final BooleanValue smartTarget = (BooleanValue) this.config.create("Smart target", true).description("Whether or not to target the goal with some iq");
 
-    ColorValue color = new ColorValue("Color", Color.BLACK);
+    final ColorValue color = new ColorValue("Color", Color.BLACK);
 
     BlockPos goingToTeleportTo = null;
     boolean flag = false;

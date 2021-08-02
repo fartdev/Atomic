@@ -29,13 +29,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class AltEntryWidget extends ClickableWidget implements Drawable, Element {
-    static Map<UUID, Identifier> skins = new HashMap<>();
-    static Map<String, PlayerEntry> cache = new HashMap<>();
+    static final Map<UUID, Identifier> skins = new HashMap<>();
+    static final Map<String, PlayerEntry> cache = new HashMap<>();
+    protected final String mail;
+    protected final String pw;
     public String uname;
     public UUID uuid;
     public double renderX;
-    protected String mail;
-    protected String pw;
     Identifier skin = DefaultSkinHelper.getTexture();
     boolean failedLogIn = false;
 

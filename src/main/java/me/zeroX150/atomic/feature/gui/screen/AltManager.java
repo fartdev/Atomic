@@ -25,8 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AltManager extends Screen {
-    public static Identifier EYE = new Identifier("atomic", "eye.png");
-    public static Identifier EYEINVIS = new Identifier("atomic", "eyeinvis.png");
+    public static final Identifier EYE = new Identifier("atomic", "eye.png");
+    public static final Identifier EYEINVIS = new Identifier("atomic", "eyeinvis.png");
+    final List<Runnable> r = new ArrayList<>();
     TextFieldWidget username;
     PasswordFieldWidget password;
     ButtonWidget login;
@@ -38,7 +39,6 @@ public class AltManager extends Screen {
     double scroll = 0;
     double renderScroll = 0;
     boolean alreadyInitialized = false;
-    List<Runnable> r = new ArrayList<>();
     Thread updater = null;
 
     public AltManager() {

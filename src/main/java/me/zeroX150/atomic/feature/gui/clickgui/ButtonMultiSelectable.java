@@ -7,8 +7,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 public class ButtonMultiSelectable extends ButtonWidget {
-    MultiValue parent;
-    int currentIndex;
+    final MultiValue parent;
+    final int currentIndex;
 
     public ButtonMultiSelectable(int x, int y, int width, MultiValue parent) {
         super(x, y, width, 12, Text.of(parent.getValue()), button -> {
