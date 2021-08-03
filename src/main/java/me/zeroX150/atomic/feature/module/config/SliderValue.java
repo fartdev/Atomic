@@ -3,9 +3,9 @@ package me.zeroX150.atomic.feature.module.config;
 import net.minecraft.util.math.MathHelper;
 
 public class SliderValue extends DynamicValue<Double> {
+    final int prec;
     double min;
     double max;
-    final int prec;
 
     public SliderValue(String key, double value, double min, double max, int precision) {
         super(key, value);
@@ -26,19 +26,19 @@ public class SliderValue extends DynamicValue<Double> {
         return min;
     }
 
-    public double getMax() {
-        return max;
+    public void setMin(double min) {
+        this.min = min;
     }
 
-    public int getPrec() {
-        return prec;
+    public double getMax() {
+        return max;
     }
 
     public void setMax(double max) {
         this.max = max;
     }
 
-    public void setMin(double min) {
-        this.min = min;
+    public int getPrec() {
+        return prec;
     }
 }

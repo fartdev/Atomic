@@ -17,6 +17,14 @@ public class Transitions {
         return value + diffCalc;
     }
 
+    public static double transition(double value, double goal, double speed, double skipSize) {
+        speed = speed < 1 ? 1 : speed;
+        double diff = goal - value;
+        double diffCalc = diff / speed;
+        if (Math.abs(diffCalc) < skipSize) diffCalc = diff;
+        return value + diffCalc;
+    }
+
     public static Color transition(Color value, Color goal, double speed) {
         int rn = (int) Math.floor(transition(value.getRed(), goal.getRed(), speed));
         int gn = (int) Math.floor(transition(value.getGreen(), goal.getGreen(), speed));
