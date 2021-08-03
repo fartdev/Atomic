@@ -24,6 +24,8 @@ public class CommandRegistry {
         commands.add(new ChatSequence());
         commands.add(new BaritoneOreSim());
         commands.add(new Baritone());
+        commands.add(new Say());
+        commands.add(new InventoryCleaner());
     }
 
     public static List<Command> getCommands() {
