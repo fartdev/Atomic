@@ -9,8 +9,11 @@ public class AttackManager {
     static LivingEntity lastAttacked;
 
     public static LivingEntity getLastAttackInTimeRange() {
-        if (lastAttack + MAX_ATTACK_TIMEOUT < System.currentTimeMillis() || lastAttacked.getPos().distanceTo(Atomic.client.player.getPos()) > 64 || lastAttacked.isDead() || Atomic.client.player.isDead()) {
+        if (lastAttack + MAX_ATTACK_TIMEOUT < System.currentTimeMillis() || Atomic.client.player == null || Atomic.client.player.isDead())
             lastAttacked = null;
+        if (lastAttacked != null) {
+            if (lastAttacked.getPos().distanceTo(Atomic.client.player.getPos()) > 64 || lastAttacked.isDead())
+                lastAttacked = null;
         }
         return lastAttacked;
     }
