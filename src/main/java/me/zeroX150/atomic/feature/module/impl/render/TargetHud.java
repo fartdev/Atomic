@@ -16,9 +16,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 import java.util.Comparator;
@@ -170,13 +167,5 @@ public class TargetHud extends Module {
         }
     }
 
-    Vec2f getPitchYawRequiredForLook(Vec3d from, Vec3d to) {
-        double vec = 57.2957763671875;
-        Vec3d target = to.subtract(from);
-        double square = Math.sqrt(target.x * target.x + target.z * target.z);
-        float pitch = MathHelper.wrapDegrees((float) (-(MathHelper.atan2(target.y, square) * vec)));
-        float yaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(target.z, target.x) * vec) - 90.0F);
-        return new Vec2f(pitch, yaw);
-    }
 }
 
