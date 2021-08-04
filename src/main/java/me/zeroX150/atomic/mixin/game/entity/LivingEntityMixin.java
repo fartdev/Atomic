@@ -4,6 +4,7 @@ import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.module.ModuleRegistry;
 import me.zeroX150.atomic.feature.module.impl.external.NoPush;
 import me.zeroX150.atomic.feature.module.impl.movement.Jesus;
+import me.zeroX150.atomic.helper.AttackManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
@@ -31,6 +32,13 @@ public class LivingEntityMixin {
         if (this.equals(Atomic.client.player)) {
             if (ModuleRegistry.getByClass(NoPush.class).isEnabled())
                 ci.cancel();
+        }
+    }
+
+    @Inject(method = "onAttacking", at = @At("HEAD"))
+    public void onAttacking(Entity target, CallbackInfo ci) {
+        if (this.equals(Atomic.client.player) && target instanceof LivingEntity entity) {
+            AttackManager.registerLastAttacked(entity);
         }
     }
 }
