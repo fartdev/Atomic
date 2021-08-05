@@ -6,6 +6,7 @@ import me.zeroX150.atomic.helper.keybind.KeybindManager;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import org.lwjgl.glfw.GLFW;
 
 public class KeyListenerBtn extends ButtonWidget {
     final Module parent;
@@ -49,7 +50,11 @@ public class KeyListenerBtn extends ButtonWidget {
     @Override
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         if (listening) this.setMessage(Text.of("... (- to cancel)"));
-        else this.setMessage(kc != -1 ? Text.of(String.valueOf((char) kc)) : Text.of("None"));
+        else {
+            String n = kc == -1 ? "None" : GLFW.glfwGetKeyName(kc, GLFW.glfwGetKeyScancode(kc));
+            if (n == null) n = "kc." + kc;
+            this.setMessage(Text.of(n));
+        }
         fill(matrices, x, y, x + width, y + height, (this.isHovered() ? ClickGUI.currentActiveTheme.active() : ClickGUI.currentActiveTheme.inactive()).getRGB());
         Atomic.fontRenderer.drawCenteredString(matrices, this.getMessage().asString(), x + width / 2f, y + height / 2f - 8 / 2f, ClickGUI.currentActiveTheme.fontColor().getRGB());
         //DrawableHelper.drawCenteredText(matrices, Atomic.client.textRenderer, this.getMessage(), x + (width / 2), y + (height / 2 - 9 / 2), 0xFFFFFF);

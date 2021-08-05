@@ -1,6 +1,7 @@
 package me.zeroX150.atomic.feature.module;
 
 import me.zeroX150.atomic.feature.gui.notifications.Notification;
+import me.zeroX150.atomic.feature.module.config.BooleanValue;
 import me.zeroX150.atomic.feature.module.config.ModuleConfig;
 import net.minecraft.client.util.math.MatrixStack;
 
@@ -11,12 +12,15 @@ public abstract class Module {
     private final ModuleType moduleType;
     private boolean enabled = false;
 
+    private final BooleanValue toasts;
+
     public Module(String n, String d, ModuleType type) {
         this.name = n;
         this.description = d;
         this.moduleType = type;
         this.config = new ModuleConfig();
         this.config.create("Keybind", -1).description("The keybind to toggle the module with");
+        toasts = (BooleanValue) this.config.create("Toasts", true).description("Whether or not to show enabled / disabled toasts");
     }
 
     public ModuleType getModuleType() {
@@ -57,7 +61,8 @@ public abstract class Module {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        Notification.create(1000, "Module toggle", (this.enabled ? "§aEn" : "§cDis") + "abled §r" + this.getName());
+        if (toasts.getValue())
+            Notification.create(1000, "Module toggle", (this.enabled ? "§aEn" : "§cDis") + "abled §r" + this.getName());
         if (this.enabled) this.enable();
         else this.disable();
     }

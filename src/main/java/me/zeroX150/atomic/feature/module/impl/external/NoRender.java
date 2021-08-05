@@ -18,6 +18,8 @@ import java.util.Arrays;
 public class NoRender extends Module {
     public static BooleanValue weather;
     public static BooleanValue hurtAnimation;
+    public static BooleanValue waterOverlay;
+    public static BooleanValue fire;
     final BooleanValue items = (BooleanValue) this.config.create("Items", false).description("Doesnt render items");
     final BooleanValue trapdoors = (BooleanValue) this.config.create("Trapdoors", false).description("Doesnt render trapdoors");
     final BooleanValue observers = (BooleanValue) this.config.create("Observers", false).description("Doesnt render observers");
@@ -51,6 +53,8 @@ public class NoRender extends Module {
         });
         weather = (BooleanValue) this.config.create("Weather", true).description("Doesnt render weather");
         hurtAnimation = (BooleanValue) this.config.create("Hurt animation", true).description("Doesnt render the hurt animation");
+        waterOverlay = (BooleanValue) this.config.create("Water overlay", true).description("Doesnt render the water overlay");
+        fire = (BooleanValue) this.config.create("Fire overlay", true).description("Doesnt render if you're on fire");
     }
 
     @Override

@@ -33,7 +33,7 @@ public class ConfigWidget {
         int yOffset = (int) Math.ceil(9 + (margin * 2));
         List<DynamicValue<?>> v = parent.config.getAll();
         if (parent.config.organizeClickGUIList) {
-            v.sort(Comparator.comparingDouble(value -> value.getKey().equalsIgnoreCase("keybind") ? -1 : Atomic.fontRenderer.getStringWidth(value.getKey())));
+            v.sort(Comparator.comparingDouble(value -> value.getKey().equalsIgnoreCase("keybind") ? -2 : (value.getKey().equalsIgnoreCase("toasts") ? -1 : Atomic.fontRenderer.getStringWidth(value.getKey()))));
             v.sort(Comparator.comparingInt(value -> value.selectors.size()));
         }
 

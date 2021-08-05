@@ -53,7 +53,7 @@ public class Nuker extends Module {
     boolean isBlockApplicable(Block b) {
         if (mode.getValue().equalsIgnoreCase("everything")) return true;
         else if (mode.getValue().equalsIgnoreCase("torches")) return b == Blocks.TORCH || b == Blocks.WALL_TORCH;
-        else if (mode.getValue().equalsIgnoreCase("fire")) return b == Blocks.FIRE;
+        else if (mode.getValue().equalsIgnoreCase("fire")) return b == Blocks.FIRE || b == Blocks.SOUL_FIRE;
         else if (mode.getValue().equalsIgnoreCase("wood")) {
             return Arrays.stream(WOOD).anyMatch(block -> block == b);
         }
