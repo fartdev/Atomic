@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AltManager extends Screen {
+public class AltManager extends Screen implements FastTickable {
     public static final Identifier EYE = new Identifier("atomic", "eye.png");
     public static final Identifier EYEINVIS = new Identifier("atomic", "eyeinvis.png");
     final List<Runnable> r = new ArrayList<>();
@@ -205,7 +205,7 @@ public class AltManager extends Screen {
         this.r.add(r);
     }
 
-    public void fastTick() {
+    public void onFastTick() {
         for (Element child : children()) {
             if (child instanceof AltEntryWidget e) {
                 e.tick();

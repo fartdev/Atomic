@@ -1,7 +1,6 @@
 package me.zeroX150.atomic;
 
-import me.zeroX150.atomic.feature.gui.clickgui.ClickGUI;
-import me.zeroX150.atomic.feature.gui.screen.AltManager;
+import me.zeroX150.atomic.feature.gui.screen.FastTickable;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleRegistry;
 import me.zeroX150.atomic.helper.ConfigManager;
@@ -29,6 +28,7 @@ public class Atomic implements ModInitializer {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
     }
 
+
     @Override
     public void onInitialize() {
         log(Level.INFO, "Initializing");
@@ -44,24 +44,29 @@ public class Atomic implements ModInitializer {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (client.currentScreen instanceof AltManager altManager) {
-                    altManager.fastTick();
-                }
                 if (Atomic.client.player == null || Atomic.client.world == null) continue;
-                for (Module module : ModuleRegistry.getModules()) {
-                    try {
-                        if (module.isEnabled()) module.onFastTick();
-                    } catch (Exception ignored) {
-                    }
-                }
-                if (ClickGUI.INSTANCE != null) ClickGUI.INSTANCE.onFastTick();
+                tickModules();
+                tickGuiSystem();
                 Rotations.update();
                 KeybindManager.update();
             }
         }, "100_tps_ticker");
         FAST_TICKER.start();
+    }
 
-        //TODO: Initializer
+    void tickModules() {
+        for (Module module : ModuleRegistry.getModules()) {
+            try {
+                if (module.isEnabled()) module.onFastTick();
+            } catch (Exception ignored) {
+            }
+        }
+    }
+
+    void tickGuiSystem() {
+        if (client.currentScreen instanceof FastTickable tickable) {
+            tickable.onFastTick();
+        }
     }
 
 

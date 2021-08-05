@@ -1,5 +1,6 @@
 package me.zeroX150.atomic.helper.keybind;
 
+import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleRegistry;
 
@@ -20,7 +21,9 @@ public class KeybindManager {
     public static void update() {
         for (Module module : keybindMap.keySet().toArray(new Module[0])) {
             Keybind kb = keybindMap.get(module);
-            if (kb.isPressed()) module.toggle();
+            if (kb.isPressed()) {
+                Atomic.client.execute(module::toggle);
+            }
         }
     }
 

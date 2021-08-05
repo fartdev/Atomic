@@ -47,6 +47,13 @@ public class Client {
         return v.value;
     }
 
+    public static void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception ignored) {
+        }
+    }
+
     public static float getClientTps() {
         RenderTickCounterAccessor accessor = ((RenderTickCounterAccessor) ((IMinecraftClientAccessor) Atomic.client).getRenderTickCounter());
         return 1000f / accessor.getTickTime();

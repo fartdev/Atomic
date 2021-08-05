@@ -11,7 +11,6 @@ import me.zeroX150.atomic.helper.Rotations;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -56,11 +55,9 @@ public class Nuker extends Module {
                     boolean b = !ignoreXray.getValue() || !XRAY.blocks.contains(bs.getBlock());
                     if (!bs.isAir() && bs.getBlock() != Blocks.WATER && bs.getBlock() != Blocks.LAVA && bs.getBlock() != Blocks.BEDROCK && b && Atomic.client.world.getWorldBorder().contains(np)) {
                         renders.add(np);
-                        if (Atomic.client.player.getAbilities().creativeMode) {
-                            Atomic.client.interactionManager.attackBlock(np, Direction.DOWN);
-                        } else {
-                            Atomic.client.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, np, Direction.DOWN));
-                            Atomic.client.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, np, Direction.DOWN));
+                        Atomic.client.interactionManager.attackBlock(np, Direction.DOWN);
+                        if (!Atomic.client.player.getAbilities().creativeMode) {
+                            Atomic.client.interactionManager.updateBlockBreakingProgress(np, Direction.DOWN);
                         }
                         Rotations.lookAtV3(new Vec3d(np.getX() + .5, np.getY() + .5, np.getZ() + .5));
                         blocksBroken++;

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.gui.particles.ParticleManager;
+import me.zeroX150.atomic.feature.gui.screen.FastTickable;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleRegistry;
 import me.zeroX150.atomic.feature.module.ModuleType;
@@ -27,7 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ClickGUI extends Screen {
+public class ClickGUI extends Screen implements FastTickable {
     public static final Identifier LOGO = new Identifier("atomic", "logo.png");
     public static ClickGUI INSTANCE;
     public static Themes.Palette currentActiveTheme = Themes.Theme.ATOMIC.getPalette();
