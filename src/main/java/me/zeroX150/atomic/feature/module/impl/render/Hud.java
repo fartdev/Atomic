@@ -9,8 +9,9 @@ import me.zeroX150.atomic.feature.module.config.SliderValue;
 import me.zeroX150.atomic.helper.Client;
 import me.zeroX150.atomic.helper.Renderer;
 import me.zeroX150.atomic.helper.Transitions;
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.PacketEvents;
+import me.zeroX150.atomic.helper.event.events.PacketEvent;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.s2c.play.WorldTimeUpdateS2CPacket;
@@ -46,7 +47,8 @@ public class Hud extends Module {
         super("Hud", "shows info about shit", ModuleType.RENDER);
         lastTimePacketReceived = System.currentTimeMillis();
 
-        Events.Packets.registerEventHandler(PacketEvents.PACKET_RECEIVE, event -> {
+        Events.registerEventHandler(EventType.PACKET_RECEIVE, event1 -> {
+            PacketEvent event = (PacketEvent) event1;
             if (event.getPacket() instanceof WorldTimeUpdateS2CPacket) {
                 currentTps = Client.roundToN(calcTps(System.currentTimeMillis() - lastTimePacketReceived), 2);
                 lastTimePacketReceived = System.currentTimeMillis();

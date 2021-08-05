@@ -56,6 +56,7 @@ public class Atomic implements ModInitializer {
                 }
                 if (ClickGUI.INSTANCE != null) ClickGUI.INSTANCE.onFastTick();
                 Rotations.update();
+                KeybindManager.update();
             }
         }, "100_tps_ticker");
         FAST_TICKER.start();

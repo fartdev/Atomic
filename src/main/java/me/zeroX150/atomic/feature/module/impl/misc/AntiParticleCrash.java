@@ -5,8 +5,9 @@ import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleType;
 import me.zeroX150.atomic.feature.module.config.BooleanValue;
 import me.zeroX150.atomic.feature.module.config.SliderValue;
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.PacketEvents;
+import me.zeroX150.atomic.helper.event.events.PacketEvent;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 
@@ -17,9 +18,10 @@ public class AntiParticleCrash extends Module {
 
     public AntiParticleCrash() {
         super("AntiParticleCrash", "prevents you from getting crashed by a ton of particles", ModuleType.MISC);
-        Events.Packets.registerEventHandler(PacketEvents.PACKET_RECEIVE, event -> {
+        Events.registerEventHandler(EventType.PACKET_RECEIVE, event -> {
             if (!this.isEnabled()) return;
-            if (event.getPacket() instanceof ParticleS2CPacket pack) {
+            if (!(event instanceof PacketEvent event1)) return;
+            if (event1.getPacket() instanceof ParticleS2CPacket pack) {
                 if (pack.getCount() > limit.getValue()) {
                     if (notify.getValue()) {
                         Notification.create(7000, "AntiParticleCrash", "You just received a packet with " + pack.getCount() + " particles. Blocking...");

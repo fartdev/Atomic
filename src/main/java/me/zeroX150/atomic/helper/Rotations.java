@@ -1,8 +1,9 @@
 package me.zeroX150.atomic.helper;
 
 import me.zeroX150.atomic.Atomic;
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.PacketEvents;
+import me.zeroX150.atomic.helper.event.events.PacketEvent;
 import me.zeroX150.atomic.mixin.network.IPlayerMoveC2SPacketAccessor;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.MathHelper;
@@ -16,7 +17,8 @@ public class Rotations {
     private static Vec3d targetV3;
 
     static {
-        Events.Packets.registerEventHandler(PacketEvents.PACKET_SEND, event -> {
+        Events.registerEventHandler(EventType.PACKET_SEND, event1 -> {
+            PacketEvent event = (PacketEvent) event1;
             if (isEnabled() && event.getPacket() instanceof PlayerMoveC2SPacket packet) {
                 IPlayerMoveC2SPacketAccessor accessor = (IPlayerMoveC2SPacketAccessor) packet;
                 accessor.setPitch(getClientPitch());

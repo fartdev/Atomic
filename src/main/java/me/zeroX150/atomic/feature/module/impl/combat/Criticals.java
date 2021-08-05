@@ -4,8 +4,9 @@ import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleType;
 import me.zeroX150.atomic.feature.module.config.MultiValue;
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.PacketEvents;
+import me.zeroX150.atomic.helper.event.events.PacketEvent;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -16,7 +17,8 @@ public class Criticals extends Module {
 
     public Criticals() {
         super("Criticals", "dont enable this on hypixel", ModuleType.COMBAT);
-        Events.Packets.registerEventHandler(PacketEvents.PACKET_SEND, event -> {
+        Events.registerEventHandler(EventType.PACKET_SEND, event1 -> {
+            PacketEvent event = (PacketEvent) event1;
             if (Atomic.client.player == null || Atomic.client.getNetworkHandler() == null) return;
             if (event.getPacket() instanceof PlayerInteractEntityC2SPacket && this.isEnabled()) {
                 Vec3d ppos = Atomic.client.player.getPos();

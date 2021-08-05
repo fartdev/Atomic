@@ -1,8 +1,8 @@
 package me.zeroX150.atomic.mixin.game.render;
 
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.RenderingEvent;
-import me.zeroX150.atomic.helper.event.RenderingEvents;
+import me.zeroX150.atomic.helper.event.events.BlockRenderingEvent;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.BlockRenderManager;
@@ -20,7 +20,7 @@ import java.util.Random;
 public class BlockRenderManagerMixin {
     @Inject(method = "renderBlock", at = @At("HEAD"), cancellable = true)
     public void renderBlock(BlockState state, BlockPos pos, BlockRenderView world, MatrixStack matrix, VertexConsumer vertexConsumer, boolean cull, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (Events.Rendering.fireEvent(RenderingEvents.BLOCK_RENDER, new RenderingEvent(null, null, state, pos, matrix)))
+        if (Events.fireEvent(EventType.BLOCK_RENDER, new BlockRenderingEvent(matrix, pos, state)))
             cir.setReturnValue(true);
     }
 }

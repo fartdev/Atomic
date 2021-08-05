@@ -4,8 +4,10 @@ import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.module.Module;
 import me.zeroX150.atomic.feature.module.ModuleType;
 import me.zeroX150.atomic.feature.module.config.BooleanValue;
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.RenderingEvents;
+import me.zeroX150.atomic.helper.event.events.BlockRenderingEvent;
+import me.zeroX150.atomic.helper.event.events.EntityRenderEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,9 +24,10 @@ public class NoRender extends Module {
 
     public NoRender() {
         super("NoRender", "doesnt render shit", ModuleType.RENDER);
-        Events.Rendering.registerEventHandler(RenderingEvents.ENTITY_RENDER, event -> {
+        Events.registerEventHandler(EventType.ENTITY_RENDER, event1 -> {
             if (!this.isEnabled() || !items.getValue()) return;
-            if (event.getEntityTarget().getType() == EntityType.ITEM) {
+            EntityRenderEvent event = (EntityRenderEvent) event1;
+            if (event.getEntity().getType() == EntityType.ITEM) {
                 event.setCancelled(true);
             }
         });
@@ -38,11 +41,12 @@ public class NoRender extends Module {
                 Blocks.SPRUCE_TRAPDOOR,
                 Blocks.WARPED_TRAPDOOR
         };
-        Events.Rendering.registerEventHandler(RenderingEvents.BLOCK_RENDER, event -> {
-            if (Arrays.stream(trapdoors).anyMatch(block -> block == event.getState().getBlock()) && this.trapdoors.getValue() && this.isEnabled()) {
+        Events.registerEventHandler(EventType.BLOCK_RENDER, event1 -> {
+            BlockRenderingEvent event = (BlockRenderingEvent) event1;
+            if (Arrays.stream(trapdoors).anyMatch(block -> block == event.getBlockState().getBlock()) && this.trapdoors.getValue() && this.isEnabled()) {
                 event.setCancelled(true);
             }
-            if (observers.getValue() && event.getState().getBlock() == Blocks.OBSERVER) event.setCancelled(true);
+            if (observers.getValue() && event.getBlockState().getBlock() == Blocks.OBSERVER) event.setCancelled(true);
         });
         weather = (BooleanValue) this.config.create("Weather", true).description("Doesnt render weather");
         hurtAnimation = (BooleanValue) this.config.create("Hurt animation", true).description("Doesnt render the hurt animation");

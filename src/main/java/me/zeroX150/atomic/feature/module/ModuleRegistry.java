@@ -107,6 +107,7 @@ public class ModuleRegistry {
         modules.add(new CleanGUI());
         modules.add(new Timer());
         modules.add(new FreeLook());
+        modules.add(new ClickNuke());
 
         modules = modules.stream().sorted(Comparator.comparingDouble(value -> -Atomic.fontRenderer.getStringWidth(value.getName()))).collect(Collectors.toList());
     }

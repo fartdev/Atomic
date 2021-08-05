@@ -6,8 +6,9 @@ import me.zeroX150.atomic.feature.module.ModuleType;
 import me.zeroX150.atomic.feature.module.config.BooleanValue;
 import me.zeroX150.atomic.feature.module.config.SliderValue;
 import me.zeroX150.atomic.helper.Client;
+import me.zeroX150.atomic.helper.event.EventType;
 import me.zeroX150.atomic.helper.event.Events;
-import me.zeroX150.atomic.helper.event.PacketEvents;
+import me.zeroX150.atomic.helper.event.events.PacketEvent;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityPose;
@@ -23,8 +24,9 @@ public class Freecam extends Module {
 
     public Freecam() {
         super("Freecam", "leave your body behind. it is a husk of what was once a great spirit", ModuleType.RENDER);
-        Events.Packets.registerEventHandler(PacketEvents.PACKET_SEND, event -> {
+        Events.registerEventHandler(EventType.PACKET_SEND, event1 -> {
             if (!this.isEnabled()) return;
+            PacketEvent event = (PacketEvent) event1;
             if (event.getPacket() instanceof PlayerMoveC2SPacket) event.setCancelled(true);
             if (event.getPacket() instanceof PlayerInputC2SPacket) event.setCancelled(true);
             if (blockInteractions.getValue()) {
