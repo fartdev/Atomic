@@ -44,9 +44,9 @@ public class Atomic implements ModInitializer {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                tickGuiSystem();
                 if (Atomic.client.player == null || Atomic.client.world == null) continue;
                 tickModules();
-                tickGuiSystem();
                 Rotations.update();
                 KeybindManager.update();
             }
