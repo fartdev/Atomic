@@ -21,15 +21,16 @@ public class NoRender extends Module {
     final BooleanValue items = (BooleanValue) this.config.create("Items", false).description("Doesnt render items");
     final BooleanValue trapdoors = (BooleanValue) this.config.create("Trapdoors", false).description("Doesnt render trapdoors");
     final BooleanValue observers = (BooleanValue) this.config.create("Observers", false).description("Doesnt render observers");
+    BooleanValue armorStands = (BooleanValue) this.config.create("Armor stands", true).description("Doesnt render armor stands");
 
     public NoRender() {
         super("NoRender", "doesnt render shit", ModuleType.RENDER);
         Events.registerEventHandler(EventType.ENTITY_RENDER, event1 -> {
-            if (!this.isEnabled() || !items.getValue()) return;
+            if (!this.isEnabled()) return;
             EntityRenderEvent event = (EntityRenderEvent) event1;
-            if (event.getEntity().getType() == EntityType.ITEM) {
+            if ((event.getEntity().getType() == EntityType.ITEM && items.getValue())
+                    || (event.getEntity().getType() == EntityType.ARMOR_STAND && armorStands.getValue()))
                 event.setCancelled(true);
-            }
         });
         Block[] trapdoors = new Block[]{
                 Blocks.ACACIA_TRAPDOOR,

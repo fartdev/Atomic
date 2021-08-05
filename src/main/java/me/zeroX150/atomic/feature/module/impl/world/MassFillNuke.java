@@ -24,7 +24,7 @@ public class MassFillNuke extends Module {
     volatile boolean run = false;
 
     public MassFillNuke() {
-        super("MassFillNuke", "Erases your whole render distance one by one [REQUIRES OP]", ModuleType.MISC);
+        super("MassFillNuke", "Erases your whole render distance one by one [REQUIRES OP]", ModuleType.WORLD);
         Events.registerEventHandler(EventType.PACKET_SEND, event -> {
             if (!this.isEnabled() || run) return;
             PacketEvent pe = (PacketEvent) event;
