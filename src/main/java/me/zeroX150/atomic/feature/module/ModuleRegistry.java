@@ -110,6 +110,7 @@ public class ModuleRegistry {
         modules.add(new ClickNuke());
         modules.add(new MassFillNuke());
         modules.add(new AutoTool());
+        modules.add(new NWordCounter());
 
         modules = modules.stream().sorted(Comparator.comparingDouble(value -> -Atomic.fontRenderer.getStringWidth(value.getName()))).collect(Collectors.toList());
     }
