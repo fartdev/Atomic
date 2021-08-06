@@ -2,11 +2,11 @@ package me.zeroX150.atomic.mixin.game.screen;
 
 import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.gui.screen.EditServerInfoScreen;
+import me.zeroX150.atomic.feature.gui.screen.ProxyManagerScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.network.MultiplayerServerListPinger;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,9 +25,6 @@ public abstract class MultiplayerScreenMixin extends Screen {
         super(Text.of(""));
     }
 
-    @Shadow
-    public abstract MultiplayerServerListPinger getServerListPinger();
-
     @Inject(method = "init", at = @At("HEAD"))
     public void init(CallbackInfo ci) {
         editMotd = new ButtonWidget(8, height - 28, 100, 20, Text.of("Edit Server"), button -> {
@@ -35,6 +32,10 @@ public abstract class MultiplayerScreenMixin extends Screen {
             Atomic.client.openScreen(new EditServerInfoScreen(se.getServer(), this));
         });
         addDrawableChild(editMotd);
+        ButtonWidget a = new ButtonWidget(5, 5, 100, 20, Text.of("Proxies"), button -> {
+            Atomic.client.openScreen(new ProxyManagerScreen(this));
+        });
+        addDrawableChild(a);
     }
 
     @Inject(method = "render", at = @At("HEAD"))

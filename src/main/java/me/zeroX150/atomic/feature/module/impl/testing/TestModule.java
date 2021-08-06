@@ -7,7 +7,7 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class TestModule extends Module {
     public TestModule() {
-        super("Test", "The dupe has been moved over to Dupe:.d 2 btw", ModuleType.MISC);
+        super("Test", "The dupe has been moved over to Dupe:.d 2 btw", ModuleType.HIDDEN);
     }
 
     @Override

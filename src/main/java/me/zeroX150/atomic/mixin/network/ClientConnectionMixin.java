@@ -30,4 +30,5 @@ public class ClientConnectionMixin {
     public void send(Packet<?> packet, CallbackInfo ci) {
         if (Events.fireEvent(EventType.PACKET_SEND, new PacketEvent(packet))) ci.cancel();
     }
+
 }
