@@ -13,8 +13,8 @@ import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class AutoLogin extends Module {
-    DynamicValue<String> pw = this.config.create("Master password", RandomStringUtils.randomAlphanumeric(10));
-    DynamicValue<String> toggle = this.config.create("Toggle sentence", ";login");
+    DynamicValue<String> pw = this.config.create("Password", RandomStringUtils.randomAlphanumeric(10)).description("The password to use");
+    DynamicValue<String> toggle = this.config.create("Toggle", ";login").description("The trigger for the module");
 
     public AutoLogin() {
         super("AutoLogin", "Logins on servers with a custom password", ModuleType.MISC);
@@ -47,7 +47,7 @@ public class AutoLogin extends Module {
 
     @Override
     public void enable() {
-        Client.notifyUser("Type in your toggle sentence to automatically register or login, if you need to");
+        Client.notifyUser("Send the sentence you configured in chat to /register and /login");
     }
 
     @Override
