@@ -3,23 +3,27 @@ package me.zeroX150.atomic.feature.gui.screen;
 import me.zeroX150.atomic.Atomic;
 import me.zeroX150.atomic.feature.gui.clickgui.ClickGUI;
 import me.zeroX150.atomic.helper.Renderer;
+import me.zeroX150.atomic.helper.Transitions;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.MathHelper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 
-public class ProxyManagerScreen extends Screen {
+public class ProxyManagerScreen extends Screen implements FastTickable {
     public static Proxy currentProxy = null;
     static boolean isSocks4 = true;
     Screen parent;
     TextFieldWidget actualProxy;
     TextFieldWidget username;
     TextFieldWidget password;
+    double animProg = 0;
+    boolean shouldClose = false;
 
     public ProxyManagerScreen(Screen parent) {
         super(Text.of(""));
@@ -43,17 +47,14 @@ public class ProxyManagerScreen extends Screen {
     }
 
     @Override
-    public boolean shouldCloseOnEsc() {
-        return true;
-    }
-
-    @Override
     public void onClose() {
-        Atomic.client.openScreen(parent);
+        //Atomic.client.openScreen(parent);
+        shouldClose = true;
     }
 
     @Override
     protected void init() {
+        shouldClose = false;
         actualProxy = new TextFieldWidget(textRenderer, getW() - 90, getH() - 55, 180, 20, Text.of("SPECIAL:Proxy IP:PORT"));
         actualProxy.setMaxLength(100);
         addDrawableChild(actualProxy);
@@ -75,7 +76,7 @@ public class ProxyManagerScreen extends Screen {
         });
         password.setEditable(!isSocks4);
         addDrawableChild(type);
-        ButtonWidget check = new ButtonWidget(getW() + 5, getH() + 45, 85, 20, Text.of("OK"), button -> {
+        ButtonWidget check = new ButtonWidget(getW() + 35, getH() + 45, 55, 20, Text.of("OK"), button -> {
             boolean validProxy = isValid(actualProxy.getText());
             if (!validProxy) {
                 actualProxy.setEditableColor(new Color(255, 20, 20).getRGB());
@@ -85,7 +86,11 @@ public class ProxyManagerScreen extends Screen {
             currentProxy = new Proxy(isSocks4, actualProxy.getText(), username.getText(), password.getText());
         });
         addDrawableChild(check);
-        ButtonWidget cancel = new ButtonWidget(getW() - 90, getH() + 45, 85, 20, Text.of("Reset"), button -> {
+        ButtonWidget back = new ButtonWidget(getW() - 27, getH() + 45, 55, 20, Text.of("Back"), button -> {
+            onClose();
+        });
+        addDrawableChild(back);
+        ButtonWidget cancel = new ButtonWidget(getW() - 90, getH() + 45, 55, 20, Text.of("Reset"), button -> {
             currentProxy = null;
         });
         addDrawableChild(cancel);
@@ -94,8 +99,21 @@ public class ProxyManagerScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        parent.render(matrices, mouseX, mouseY, delta);
-        DrawableHelper.fill(matrices, getW() - 100, getH() - 75, getW() + 100, getH() + 75, Renderer.modify(ClickGUI.currentActiveTheme.inactive(), -1, -1, -1, 60).getRGB());
+        if (shouldClose && animProg == 0) {
+            Atomic.client.openScreen(parent);
+            return;
+        }
+
+        parent.render(matrices, -1, -1, delta);
+
+        double m = Transitions.easeOutBack(animProg);
+        double mr = 1 - m;
+        double pw = getW() * mr;
+        double ph = getH() * mr;
+        matrices.translate(pw, ph, 0);
+        matrices.scale((float) m, (float) m, 1);
+        DrawableHelper.fill(matrices, getW() - 100, getH() - 75, getW() + 100, getH() + 75, Renderer.modify(ClickGUI.currentActiveTheme.inactive(), -1, -1, -1, 120).getRGB());
+
         Atomic.fontRenderer.drawCenteredString(matrices, "Proxy manager" + (currentProxy == null ? "" : " (Using proxy)"), getW(), getH() - 70, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
@@ -104,6 +122,14 @@ public class ProxyManagerScreen extends Screen {
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         super.mouseClicked(0, 0, 0);
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public void onFastTick() {
+        double a = 0.020;
+        if (shouldClose) a *= -1;
+        animProg += a;
+        animProg = MathHelper.clamp(animProg, 0, 1);
     }
 
     public static class Proxy {
