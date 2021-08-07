@@ -45,6 +45,8 @@ public class Atomic implements ModInitializer {
                     e.printStackTrace();
                 }
                 tickGuiSystem();
+                // this is literally just onFastTick but without the world check
+                tickModulesNWC(); // order is important
                 if (Atomic.client.player == null || Atomic.client.world == null) continue;
                 tickModules();
                 Rotations.update();
@@ -52,6 +54,15 @@ public class Atomic implements ModInitializer {
             }
         }, "100_tps_ticker");
         FAST_TICKER.start();
+    }
+
+    void tickModulesNWC() {
+        for (Module module : ModuleRegistry.getModules()) {
+            try {
+                if (module.isEnabled()) module.onFastTick_NWC();
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     void tickModules() {

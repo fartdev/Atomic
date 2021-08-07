@@ -51,6 +51,10 @@ public abstract class Module {
 
     }
 
+    public void onFastTick_NWC() {
+
+    }
+
     public void toggle() {
         setEnabled(!enabled);
     }

@@ -20,9 +20,12 @@ public class Blink extends Module {
 
     public Blink() {
         super("Blink", "confuses chinese anticheats", ModuleType.MOVEMENT);
-        Module parent = this;
         Events.registerEventHandler(EventType.PACKET_SEND, event1 -> {
-            if (!parent.isEnabled()) return;
+            if (!this.isEnabled()) return;
+            if (Atomic.client.player == null || Atomic.client.world == null) {
+                setEnabled(false);
+                return;
+            }
             PacketEvent event = (PacketEvent) event1;
             if (event.getPacket() instanceof KeepAliveC2SPacket) return;
             event.setCancelled(true);
@@ -44,7 +47,10 @@ public class Blink extends Module {
 
     @Override
     public void disable() {
-        if (Atomic.client.player == null || Atomic.client.getNetworkHandler() == null) return;
+        if (Atomic.client.player == null || Atomic.client.getNetworkHandler() == null) {
+            queue.clear();
+            return;
+        }
         for (Packet<?> packet : queue.toArray(new Packet<?>[0])) {
             Atomic.client.getNetworkHandler().sendPacket(packet);
         }
