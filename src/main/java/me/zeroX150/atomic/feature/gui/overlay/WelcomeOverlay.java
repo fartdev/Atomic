@@ -51,7 +51,7 @@ public class WelcomeOverlay extends Overlay {
                         @Override
                         public void callback(boolean isOutdated) {
                             log("Checked for updates!");
-                            log(isOutdated ? "§cClient build is desynced!" : "§aClient is up to date!");
+                            log(isOutdated ? "§cClient build is desynced! Please restart!" : "§aClient is up to date!");
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {

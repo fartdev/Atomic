@@ -120,12 +120,12 @@ public class Client {
         }
         callback.log("Downloading latest client jar");
         downloadFile("https://github.com/cornos/Atomic/raw/master/builds/latest.jar", parent.getAbsolutePath());
-        callback.log("Downloaded!");
         HashCode hc = Files.asByteSource(modFile).hash(Hashing.crc32());
-        callback.log("Hash of current jarfile: " + hc);
         HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
-        callback.log("Hash of latest jarfile: " + hc1);
-        if (!hc.equals(hc1)) callback.log("Hash mismatch!");
+        if (!hc.equals(hc1)) {
+            callback.log("Updating client...");
+            Files.move(parent, modFile);
+        }
         callback.callback(!hc.equals(hc1));
     }
 
