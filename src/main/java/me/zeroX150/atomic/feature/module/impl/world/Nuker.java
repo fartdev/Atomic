@@ -32,11 +32,6 @@ public class Nuker extends Module {
     MultiValue mode = (MultiValue) this.config.create("Mode", "Everything", "Everything", "Torches", "Fire", "Wood").description("What to nuke");
     BooleanValue autoTool = (BooleanValue) this.config.create("Auto tool", true).description("Automatically picks the best tool from your inventory, for the block being broken");
     int delayPassed = 0;
-
-    public Nuker() {
-        super("Nuker", "breaking block", ModuleType.WORLD);
-    }
-
     Block[] WOOD = new Block[]{
             Blocks.ACACIA_LOG,
             Blocks.BIRCH_LOG,
@@ -49,6 +44,10 @@ public class Nuker extends Module {
             Blocks.STRIPPED_DARK_OAK_LOG,
             Blocks.STRIPPED_JUNGLE_LOG, Blocks.STRIPPED_OAK_LOG, Blocks.STRIPPED_SPRUCE_LOG
     };
+
+    public Nuker() {
+        super("Nuker", "breaking block", ModuleType.WORLD);
+    }
 
     boolean isBlockApplicable(Block b) {
         if (mode.getValue().equalsIgnoreCase("everything")) return true;

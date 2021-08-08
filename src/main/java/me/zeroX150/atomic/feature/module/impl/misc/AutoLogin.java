@@ -14,7 +14,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class AutoLogin extends Module {
     DynamicValue<String> pw = this.config.create("Password", RandomStringUtils.randomAlphanumeric(10)).description("The password to use");
-    DynamicValue<String> toggle = this.config.create("Toggle", ";login").description("The trigger for the module");
+    DynamicValue<String> toggle = this.config.create("Toggle", "login").description("The trigger for the module");
 
     public AutoLogin() {
         super("AutoLogin", "Logins on servers with a custom password", ModuleType.MISC);

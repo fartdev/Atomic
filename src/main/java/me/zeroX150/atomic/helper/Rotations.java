@@ -7,6 +7,7 @@ import me.zeroX150.atomic.helper.event.events.PacketEvent;
 import me.zeroX150.atomic.mixin.network.IPlayerMoveC2SPacketAccessor;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 
 public class Rotations {
@@ -41,15 +42,21 @@ public class Rotations {
         lastModificationTime = System.currentTimeMillis();
     }
 
+    public static Vec2f getPitchYaw(Vec3d targetV3) {
+        double vec = 57.2957763671875;
+        Vec3d target = targetV3.subtract(Atomic.client.player.getEyePos());
+        double square = Math.sqrt(target.x * target.x + target.z * target.z);
+        float pitch = MathHelper.wrapDegrees((float) (-(MathHelper.atan2(target.y, square) * vec)));
+        float yaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(target.z, target.x) * vec) - 90.0F);
+        return new Vec2f(pitch, yaw);
+    }
+
     public static void update() {
         tick();
         if (targetV3 != null) {
-            double vec = 57.2957763671875;
-            Vec3d target = targetV3.subtract(Atomic.client.player.getEyePos());
-            double square = Math.sqrt(target.x * target.x + target.z * target.z);
-            float pitch = MathHelper.wrapDegrees((float) (-(MathHelper.atan2(target.y, square) * vec)));
-            clientYaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(target.z, target.x) * vec) - 90.0F);
-            clientPitch = pitch;
+            Vec2f py = getPitchYaw(targetV3);
+            clientYaw = py.y;
+            clientPitch = py.x;
         }
     }
 

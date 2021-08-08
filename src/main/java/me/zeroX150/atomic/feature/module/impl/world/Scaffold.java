@@ -13,10 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 
 public class Scaffold extends Module {
     final SliderValue extend = this.config.create("Extend", 3, 0, 5, 1);
@@ -75,7 +72,6 @@ public class Scaffold extends Module {
             // fucking multithreading moment
             int finalSelIndex = selIndex;
             BlockPos finalBp = bp;
-            Rotations.lookAtV3(new Vec3d(bp.getX() + .5, bp.getY() + 0.5, bp.getZ() + .5));
             Atomic.client.execute(() -> placeBlockWithSlot(finalSelIndex, finalBp));
             if (extend.getValue() != 0) {
                 Vec3d dir1 = Atomic.client.player.getVelocity().multiply(3);
@@ -97,6 +93,9 @@ public class Scaffold extends Module {
     void placeBlockWithSlot(int s, BlockPos bp) {
         BlockState st = Atomic.client.world.getBlockState(bp);
         if (!st.getMaterial().isReplaceable()) return;
+        Vec2f py = Rotations.getPitchYaw(new Vec3d(bp.getX() + .5, bp.getY() + .5, bp.getZ() + .5));
+        Rotations.setClientPitch(py.x);
+        Rotations.setClientYaw(py.y);
         int c = Atomic.client.player.getInventory().selectedSlot;
         Atomic.client.player.getInventory().selectedSlot = s;
         BlockHitResult bhr = new BlockHitResult(new Vec3d(bp.getX(), bp.getY(), bp.getZ()), Direction.DOWN, bp, false);

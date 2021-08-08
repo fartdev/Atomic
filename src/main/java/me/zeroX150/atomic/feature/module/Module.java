@@ -10,9 +10,8 @@ public abstract class Module {
     private final String name;
     private final String description;
     private final ModuleType moduleType;
-    private boolean enabled = false;
-
     private final BooleanValue toasts;
+    private boolean enabled = false;
 
     public Module(String n, String d, ModuleType type) {
         this.name = n;
