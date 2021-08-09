@@ -2,6 +2,10 @@
 
 A 1.17 fabric mod with useful features for enforcing the [Minecraft commercial use guidelines](https://account.mojang.com/documents/commercial_guidelines#:~:text=sell%20entitlements%20that%20affect%20gameplay) on certian Minecraft servers. 
 
+**This client has been privated. No updates are going to be published anymore.**
+
+If you'd like to get the client in its private form, dm me @ 0x150#0150, and maybe you'll get it.
+
 ## Why?
 This is the sequel to [cornos](https://cornos.cf), but ported to 1.17, with a new look and functionality. Cornos became a bit stale, so I decided to start this.
 
