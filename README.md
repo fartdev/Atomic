@@ -6,11 +6,17 @@ A 1.17 fabric mod with useful features for enforcing the [Minecraft commercial u
 
 ## Read this bruh
 
+**This is the last public version + ImGui**
+
 **Don't even bother if you have linux. Ask 0x150. He bricked his computer trying to install GLIBC verison 2.29**
 
-**This client has been privated. No updates are going to be published anymore.**
+**Troubleshooting**
 
-**This is the last public version + ImGui**
+ - if it breaks use .test to reset the imgui instance and it should fix it
+ - try not to enable clickgui or imgui while in imgui
+ - use clickgui or .config to change binds i dont care to figure out how do keybinds
+
+**This client has been privated. No updates are going to be published anymore.**
 
 If you'd like to get the client in its private form, dm me @ 0x150#0150, and maybe you'll get it.
 
