@@ -100,6 +100,12 @@ public class Client {
     public static void isClientOutdated(OutdatedCheckCallback callback) throws Exception {
         callback.log("Getting current mod file");
         File modFile = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        if (true) { // fuck you updater
+            callback.log("fuck you updater");
+            Thread.sleep(500);
+            callback.callback(false);
+            return;
+        }
         if (modFile.isDirectory()) {
             callback.log("Detected development environment. Wont check for updates");
             Thread.sleep(500);

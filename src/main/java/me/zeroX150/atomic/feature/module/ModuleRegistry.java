@@ -112,6 +112,7 @@ public class ModuleRegistry {
         modules.add(new AutoTool());
         modules.add(new NWordCounter());
         modules.add(new AutoLogin());
+        modules.add(new ImGUI());
 
         modules = modules.stream().sorted(Comparator.comparingDouble(value -> -Atomic.fontRenderer.getStringWidth(value.getName()))).collect(Collectors.toList());
     }

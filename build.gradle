@@ -40,6 +40,17 @@ dependencies {
 		implementation name: 'baritone-api-1.7.0'
 		include name: 'baritone-api-1.7.0'
 	}
+
+	implementation("io.github.spair:imgui-java-binding:1.82.2")
+	include("io.github.spair:imgui-java-binding:1.82.2")
+	implementation("io.github.spair:imgui-java-lwjgl3:1.82.2") {
+		exclude group: "org.lwjgl"
+	}
+	include("io.github.spair:imgui-java-lwjgl3:1.82.2")
+	["linux", "linux-x86", "macos", "windows", "windows-x86"].each {
+		implementation("io.github.spair:imgui-java-natives-$it:1.82.2")
+		include("io.github.spair:imgui-java-natives-$it:1.82.2")
+	}
 }
 
 processResources {

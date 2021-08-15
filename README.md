@@ -2,7 +2,15 @@
 
 A 1.17 fabric mod with useful features for enforcing the [Minecraft commercial use guidelines](https://account.mojang.com/documents/commercial_guidelines#:~:text=sell%20entitlements%20that%20affect%20gameplay) on certian Minecraft servers. 
 
+**This is a fork of the last public version of the client, but with ImGui menu**
+
+## Read this bruh
+
+**Don't even bother if you have linux. Ask 0x150. He bricked his computer trying to install GLIBC verison 2.29**
+
 **This client has been privated. No updates are going to be published anymore.**
+
+**This is the last public version + ImGui**
 
 If you'd like to get the client in its private form, dm me @ 0x150#0150, and maybe you'll get it.
 
